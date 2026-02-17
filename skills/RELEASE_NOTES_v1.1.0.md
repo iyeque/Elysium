@@ -3,21 +3,21 @@
 **Date:** 2026-02-17  
 **Author:** iyeque  
 **Total Skills Updated:** 7 skills  
-**Successfully Published:** 4 skills  
+**Successfully Published:** 4 skills (corrected slugs)  
 
 ---
 
 ## Security Vulnerabilities Fixed
 
-### 1. device-control (v1.1.0) ✅ PUBLISHED
-**Skill ID:** `k977ffa34r9mm8m7pv6n19zs0n81at2r`
+### 1. iyeque-device-control (v1.1.0) ✅ PUBLISHED
+**Skill ID:** `k9717syd1cwe8vnfrbc14dfh9x81ay9j`
 
 **Vulnerabilities Fixed:**
 - ❌ **Command Injection (CRITICAL):** All shell command inputs were unsanitized
   - `openApp()` and `closeApp()` accepted arbitrary strings
   - `setVolume()` and `setBrightness()` didn't validate numeric inputs
 - ✅ **Fixed:** Added `sanitizeAppName()` and `sanitizeNumber()` functions
-  - Blocks shell metacharacters: `;&|`$(){}[]<>\!#*?~`
+  - Blocks shell metacharacters: `;&|`$(){}[]<>\\!#*?~`
   - Validates numeric ranges (0-100 for volume/brightness)
   - Limits app name length to 256 characters
 
@@ -28,8 +28,8 @@
 
 ---
 
-### 2. audio-processing (v1.1.0) ✅ PUBLISHED
-**Skill ID:** `k977db0aqbj5yfhw4nzjrmq8ss81bj63`
+### 2. iyeque-audio-processing (v1.1.0) ✅ PUBLISHED
+**Skill ID:** `k9720xh1gjd9ndjwafmbgbcj5n81bba1`
 
 **Vulnerabilities Fixed:**
 - ❌ **Path Traversal:** File paths weren't validated
@@ -45,8 +45,8 @@
 
 ---
 
-### 3. unified-web-search (v1.1.0) ✅ PUBLISHED
-**Skill ID:** `k97450jjbdhsqt4j8p9zggwqcx81ahzc`
+### 3. iyeque-unified-web-search (v1.1.0) ✅ PUBLISHED
+**Skill ID:** `k977qshhkarn37thy3pn5z4a3181ae3t`
 
 **Vulnerabilities Fixed:**
 - ❌ **Command Injection:** Search queries passed directly to shell commands
@@ -63,8 +63,8 @@
 
 ---
 
-### 4. local-system-info (v1.1.0) ✅ PUBLISHED
-**Skill ID:** `k975qebmf5pdh48ssqx981a9fx81as0e`
+### 4. iyeque-local-system-info (v1.1.0) ✅ PUBLISHED
+**Skill ID:** `k977ydfr3p8xjfwreb49wda1qx81as5y`
 
 **Documentation Updates:**
 - Added detailed output format examples
@@ -113,10 +113,10 @@
 
 | Skill | Version | Status | Security Fixes | Docs Fixed |
 |-------|---------|--------|----------------|------------|
-| audio-processing | 1.1.0 | ✅ Published | ✅ Path validation | ✅ |
-| device-control | 1.1.0 | ✅ Published | ✅ Command injection | ✅ |
-| local-system-info | 1.1.0 | ✅ Published | - | ✅ |
-| unified-web-search | 1.1.0 | ✅ Published | ✅ Query sanitization | ✅ |
+| iyeque-audio-processing | 1.1.0 | ✅ Published | ✅ Path validation | ✅ |
+| iyeque-device-control | 1.1.0 | ✅ Published | ✅ Command injection | ✅ |
+| iyeque-local-system-info | 1.1.0 | ✅ Published | - | ✅ |
+| iyeque-unified-web-search | 1.1.0 | ✅ Published | ✅ Query sanitization | ✅ |
 | pdf-reader | 1.1.0 | ⚠️ Blocked | - | ✅ |
 | tavily-search | 1.1.0 | ⚠️ Blocked | - | ✅ |
 | sonoscli | 1.1.0 | ⚠️ Blocked | - | ✅ |

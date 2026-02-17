@@ -1,22 +1,22 @@
 {
   "version": 1,
   "skills": {
-    "audio-processing": {
+    "iyeque-audio-processing": {
       "version": "1.1.0",
       "installedAt": 1771336800000,
       "publishedAt": 1771336800000
     },
-    "device-control": {
+    "iyeque-device-control": {
       "version": "1.1.0",
       "installedAt": 1771336800000,
       "publishedAt": 1771336800000
     },
-    "local-system-info": {
+    "iyeque-local-system-info": {
       "version": "1.1.0",
       "installedAt": 1771336800000,
       "publishedAt": 1771336800000
     },
-    "unified-web-search": {
+    "iyeque-unified-web-search": {
       "version": "1.1.0",
       "installedAt": 1771336800000,
       "publishedAt": 1771336800000
