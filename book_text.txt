@@ -1,0 +1,1921 @@
+The Nine Stitches
+What happens if you try to fail and succeed?
+M.W.E. Wigman
+Part 1
+
+
+Copyright © 2024 M.W.E. Wigman
+All rights reserved. No part of this book may be reproduced,
+distributed, or transmitted in any form or by any
+means—including photocopying, recording, or other electronic
+or mechanical methods—without the prior written permission
+of the author, except in the case of brief quotations embodied in
+critical reviews or certain other non-commercial uses permitted
+by copyright law.
+For permission requests, please contact the publisher at:
+mmmuraya@outlook.com
+Self-published via Kindle Direct Publishing
+ISBN-13: 979-8307975848
+Second Edition
+
+
+To my wife and daughter, the irresistible forces that continue to
+challenge my immovable nature.
+1
+
+
+Contents
+I
+ntroduction
+Where Flesh meets the Infinite
+Chapter 1
+The one in time
+Chapter 2
+If you can’t evade it, embrace it
+Chapter 3
+The elegance of flaws
+Chapter 4
+Microcosm and macrocosm
+3
+
+“To become, be calm”
+“To be calm, pretend to be calm”
+4
+M.W.E. WIGMAN
+
+Introduction
+5
+
+W
+here Flesh meets the Infinite.
+The body, wrapped in flesh marks the boundary
+where the physical meets the metaphysical. In a physical sense,
+the body is flesh bound by skin—a dynamic parchment upon
+which the story of our senses is inscribed. Some might consider
+it a bag of bones, unless you’re an arthropod, then its chitin. Yet,
+exceptions abound: earthworms, corals, squids. For now, let’s
+focus on Homo sapiens.
+We have five senses, each extending our body’s limits beyond
+the skin with the exception of touch. The upper boundary of
+our flesh becomes the lower boundary to the rest of the senses.
+Additionally, personal space varies for each person, creating a
+distance predicated on intimacy factors.
+Over millennia, human senses have evolved, finely tuning
+our interaction with the environment, adapting our boundaries
+of perception. If we take each of the remaining senses, smell
+would carry the next determinant, as aroma is agreeable, while
+odor might not be. Olfaction, the technical term for our
+perception of smell carries positive, neutral or negative
+connotations with subtlety. Sight follows, simply because you
+can hear further than you can see. For instance, if you consider
+hearing a plane flying above you but not being able to see the
+pilots if you’re standing on the run way during takeoff.
+Additionally, you can hear reflected sounds, but you can’t see
+around a corner without a mirror.
+However, it’s more logical to discredit this perspective and
+accept that you can see further than you can hear. For example,
+you can see a distant mountain but not hear the conversation of
+mountain climbers. These two sensory inputs are simply limited
+6
+M.W.E. WIGMAN
+
+by those without either. Together, they extend the distance
+several miles beyond the body.
+Taste offers an intimate dialogue with the external by adding
+an inward dimension of touch to detect sensory data beyond
+temperature and texture, such as flavor. It is also correlated with
+our sense of smell; one’s sense of taste can be altered by a flu. This
+provides a finer-tuned gauge.
+The voice lies somewhere between the impact of one who
+is mute to the extent of an opera singer’s vocal cords. Though
+not sensorial, it correlates to listening and seeing in the case of
+sign language. Intuition, perhaps having the greatest impact on
+distance, is uniquely gauged by experience and knowledge.
+Emotions, intertwined with our sensory experience and
+often sparked by it, can profoundly alter our perception of the
+boundary between self and world, shaping our subjective reality
+to one is the more fluid and dynamic. The profoundness of this
+question can now be tackled as a blurred answer comes to light.
+Breathing and sunbathing are intrinsic to the body but
+perhaps dependent on sensory input independent of the body.
+They are part of the world body, not the human body. One needs
+them but they don’t need one. Can the warmth of the sun on our
+skin bridge the gap between self and the universe?
+This brings to light the parameters of the world that separate
+it from us, and its own sensory inputs that elevate it to impose
+itself on our lives. One’s perception of the world can come in the
+form of a story through which our senses perceive reality. On a
+molecular or atomic level, our structure is identical to the world’s
+diverse plethora.
+In various cultures, the concept of personal space and
+sensory engagement with the world vary, reflecting the diverse
+THE NINE STITCHES
+7
+
+understandings of these boundaries. A philosopher might
+consider the boundary as subjectively fluid with the sense of
+self elevating to the mind within the body. “Cogito, ergo sum.”
+“I think, therefore I am.” Famously coined by a French
+mathematician as an attempt to ground knowledge in certainty.
+If one is to flip this on its head, however, “I am, therefore I think,”
+presupposes existence preceding thought. One’s experiences
+shape one’s being.
+Perhaps it is a back-and-forth dance that justifies the
+chicken-and-egg scenario. In this case, the egg came from the
+chicken, and a nest that was ready with eggs that hatched into
+little chicks laid by a predecessor yet to be biologically classified
+as such. Both perhaps correct answers as to which took
+precedence.
+This is both scientific and philosophical. The layers of
+sensory input, personal space and the interplay of the mind and
+body shed light on how our perceptions shape our reality and
+illuminate the complexity of human experience. A realization
+that wouldn’t be exclusive to humans, but generalized to all
+lifeforms to varying degrees.
+There is an additional consideration: technology blurs the
+lines of this interplay even further. From a pair of spectacles
+to a cochlear implant, technology seamlessly blends with our
+bodies. Our natural vision is extended and our auditory system
+enhanced or even restored. These are classic examples of the
+world body integrating into the human body, becoming part of
+how we perceive either one.
+Genome sequencing has successfully opened the doors to
+genetic editing, with tools such as CRISPR-Cas9 now being
+used live (en-vivo), and the traits having intergenerational
+8
+M.W.E. WIGMAN
+
+permanence. Initially, this will solve the basic genetic diseases.
+However, eventually, what starts as a minority of designer babies
+could permeate into a new normal of super-human society
+within a few short decades, beyond the veil of ethical debates.
+Perhaps the first humans to colonize Mars will breathe in carbon
+dioxide and expel oxygen, a solution potentially cheaper than
+terraforming the planet using Earth as a control experiment.
+This is the shallow end of a pool that may have no deep
+end. Consider our current technological mark as a tipping point,
+beyond which one can sink if unable to float, metaphorically
+speaking. This could be augmented reality (AR) or virtual reality
+(VR) blending with our physical reality. Extending this further
+are neural interfaces and the Mariana Trench of digitized
+consciousness, seen as the singularity. A depth far greater than
+the height of Mount Everest, yet despite the extreme conditions,
+life still thrives.
+The world is a body and we are its extension—the parts
+of it that allow it to craft reality into a story with which our
+own senses can perceive it. We are its actuators. Within our
+bodies are sensors that gather information from the world body,
+acting as environmental detectors. The world body then shapes
+our perception and we actuate our responses accordingly, with
+its own sensors picking up on these as natural phenomena.
+Technology merely amplifies and is beginning to clarify this
+interaction, making the boundary even more fluid and
+interconnected.
+An eternal dance of input and output akin to a symbiosis of
+self and universe. One that is autonomic to both bodies. Therein
+lie governing systems operating independently of voluntary
+control, ensuring this crucial dance continues seamlessly in the
+THE NINE STITCHES
+9
+
+background. We shall explore these concepts further in the
+chapters ahead.
+10
+M.W.E. WIGMAN
+
+Chapter 1
+11
+
+T
+he one in time.
+It is often suggested that taking care of problems early
+on prevents them from becoming bigger issues that require more
+effort and resources to fix later. What if, however, one simply
+doesn’t catch the small tear, or does so but doesn’t stitch it? A
+time bomb ticking towards an imminent catastrophe?
+In world systems, would the same principle apply? For us
+to consider these questions, we have to understand the bigger
+perspective within which they lie i.e. intentionality and
+outcome. There is of course, a non-linear, complex relationship
+that binds one’s conscious intention and subconscious actions.
+Conventional wisdom suggests that our conscious actions,
+not only play a role in shaping our intentions, but also directly
+lead to corresponding outcomes. After all, it is the third Law of
+a famous English polymath, stated as “Action and reaction are
+equal and opposing”.
+Largely undisputed, this view can instead be seen as more
+nuanced with an interplay between the reaction—our stated
+goal, and the action —one’s own motivation. A result of the
+interconnected nature of these systems as initially introduced.
+Consider the disconnect between conscious intention and
+subconscious behavior. For instance, in the human body, we
+might intend to eat healthy, but unconsciously yearn for comfort
+foods when stressed. This is similar to the world in the case
+of particular economic strategies like corporate tax cuts,
+deregulation and privatization efforts as well as Quantitative
+Easing (QE) and low interest rates. Well-meaning but in
+practice, these lead to unintended increases in wealth inequality.
+The tax cuts can result in shareholder-centric corporations
+that boost stock prices, widening the gaps between the wealthy
+12
+M.W.E. WIGMAN
+
+and the average worker. When essential services are privatized,
+like education and health care, the hardest hit are always the
+low-income individuals as the cost of these services can increase.
+Central banks have hoped to stimulate economic growth, only
+to benefit the significant asset holders since they drive up the
+prices of stocks, real estate and other financial assets. Rising costs
+were inevitable for those that didn’t see comparable benefits.
+Examples of successful failure in action include:
+The United States Tax Cuts and Jobs Act (TCJA) of 2017
+which significantly lowered tax rates from 35% to 21% with the
+goal of increasing investment and job creation. However, the
+Institute on Taxation and Economic Policy reported that much
+of the tax savings went toward stock buybacks rather than wage
+increases or job creation, leading to greater shareholder gains.
+The privatization of water in Bolivia from 1990 to 2000,
+intended to improve the service efficiency, resulted in a
+substantial increase in prices, affecting lower-income citizens in
+a disproportional manner. The United Nations Development
+Programme (UNDP) reporting prices increased by as much as
+300%. This led to mass protests known as the Cochabamba
+Water War.
+The Quantitative Easing policy by the European Central
+Bank from 2015 to 2020 raised the value of assets which in
+turn benefited the wealthier Europeans over lower-income
+households. Initially intended to boost economic growth but
+instead led to higher living costs and decreased housing
+affordability.
+• Institute on Tax and Economic Policy. (2018). The
+TCJA and Its Impact on Stock Buybacks. Retrieved from
+THE NINE STITCHES
+13
+
+itep.org
+• United Nations Development Programme. (2006).
+Cochabamba Water War: Bolivia Case Study. Retrieved
+from undp.org
+• European Central Bank. (2020). The Impact of
+Quantitative Easing on Asset Prices and Inequality in the
+Eurozone. Retrieved from ecb.europa.eu
+Outside the realm of human experiences and global systems,
+a similar non-linear relationship between intention and outcome
+is mirrored in the natural world. This can come as a result of
+human interaction or independently.
+One such example is the bioluminescent nature of
+phytoplankton. On the surface, this is a spectacular visual effect
+privy to certain beaches that glow at night. An outcome far
+beyond its original “intention”. This classical disconnect of a
+beautiful light show to the original self-defense mechanism
+highlights yet another scientific phenomenon akin to the
+doppler effect.
+The relationship is reinforced between only two points of
+view—the source and the observer —and also that of the
+relativity of change in the wave frequency with motion as a
+variable. In this context we have the intender, the recipient of
+intention and the witnesses of the intention or the effect on
+the recipient. All the complexities can be expressed as mutually
+exclusive or highly interdependent events.
+For many of the bioluminescent species of phytoplankton,
+the self-defense mechanism works through different means
+making it an effective strategy for survival. When disturbed,
+emitting a flash of light can startle or confuse potential
+14
+M.W.E. WIGMAN
+
+predators. The light can also act as a signal to attract larger
+predators that feed on their own distress—an enemy of my
+enemy is my friend tactic.
+In some cases, the flash of light helps the phytoplankton
+blend into the ambient light on the surface of the water in a
+phenomenon called “counterillumination”. This reduces the
+chance of detection from below, in certain lighting conditions.
+Another point of view is the relationship between human
+impact
+and
+natural
+processes.
+The
+nitrogen
+and
+phosphorous-rich run-off from the agricultural and urban
+development industry, often intended to boost crop yields and
+maintain lawns and landscapes among other economic activities,
+is a human intent to enhance plant growth and food production.
+However, unintended consequences arise when such run-off
+reaches coastal waters. Excessive nutrients can catalyze the
+growth of phytoplankton, including bioluminescent species. The
+result being intense harmful algae blooms (HABs), often
+interpreted as a sign of ecosystem imbalance. The toxins
+produced have dire consequences on marine life as well as
+humans living near affected coasts. Upon their death the
+depletion of oxygen levels in the water creates “dead zones” that
+suffocate fish and other marine organisms.
+The beauty of glowing blues and greens, though seemingly
+appreciable, is meant to be rare. The increase in frequency is
+an indicator of ecological stress, with the source being human
+activity
+and
+hence
+the
+disconnect
+portrayed
+as
+an
+interconnected ecosystem.
+• Haddock, S. H. D., Moline, M. A., & Case, J. F. (2010).
+Bioluminescence in the Sea. Annual Review of Marine
+THE NINE STITCHES
+15
+
+Science, 2(1), 443-493.
+• Widder, E. A. (2010). Bioluminescence in the Ocean:
+Origins of Biological, Chemical, and Ecological
+Diversity. Science, 328(5979), 704-708.
+• Vitousek, P. M., Mooney, H. A., Lubchenco, J., &
+Melillo, J. M. (1997). Human Domination of Earth’s
+Ecosystems. Science, 277(5325), 494-499.
+As we proceed further, it is crucial to remind the reader
+that we are contemplating the paradoxical concept of productive
+failure. If done successfully, it challenges the very understanding
+of success and failure as propositions not just aspects that are
+binary opposites but interconnected and fundamental to growth
+and self-discovery. Such challenges can be approached with a
+more nuanced, systems thinking perspective.
+Cognitive bias is a systematic error in thinking that affects
+the decisions and judgments that people make, often as a result
+of our brain’s attempt to simplify information processing. These
+mental shortcuts can distort our perceptions and hence
+intentions in ways that don’t align with reality. Examples include
+the Dunning-Kruger effect, where people with low ability,
+knowledge, or skill in particular area over estimate their own
+competence.
+This often stems from the lack of self-awareness to accurately
+assess themselves and the overestimation of ability as a result
+of inexperience or information limitation. The effect generally
+diminishes with increase in proficiency and knowledgeability. Its
+recognition can encourage humility and openness to learning.
+Perception of outcomes and attribution to event causality
+are directly influenced by cognitive biases. Systemically, the
+16
+M.W.E. WIGMAN
+
+over-confidence effect can lead to overestimated understanding,
+misinformation and public confusion. Coupled with social
+media reach and amplified by inaccurate views on complex
+health topics or climate sciences from high-profile individuals,
+this results in cases of resistance to public health guidelines,
+increased vaccine hesitancy during the COVID-19 pandemic
+and climate change denial.
+• Pennycook, G., & Rand, D. G. (2021). Fighting
+misinformation on social media using crowdsourced
+judgments of news source quality. Proceedings of the
+National Academy of Sciences, 118(15), e2024174118.
+• Chou, W.-Y. S., & Budenz, A. (2020). Considering
+Emotion in COVID-19 Vaccine Communication:
+Addressing Vaccine Hesitancy and Fostering Vaccine
+Confidence.
+Health
+Communication,
+35(14),
+1718–1722.
+• Oreskes, N., & Conway, E. M. (2010). Merchants of
+Doubt: How a Handful of Scientists Obscured the
+Truth on Issues from Tobacco Smoke to Global
+Warming. Bloomsbury Publishing.
+• Dunlap, R. E., & McCright, A. M. (2011). Organized
+Climate Change Denial. In J. S. Dryzek, R. B.
+Norgaard, & D. Schlosberg (Eds.), The Oxford
+Handbook
+of
+Climate
+Change
+and
+Society
+(pp.
+144–160). Oxford University Press.
+Individually, other biases can alter our experiences and
+influence how we interpret outcomes. Self-serving bias can lead
+us to attribute success to one’s skills and failures to external
+THE NINE STITCHES
+17
+
+factors. Seeking information that supports one’s existing beliefs
+about inherent abilities or chances of success would result from
+confirmation bias.
+While these biases are typically human psychological
+processes, there are analogous behaviors in nature that mimic
+them found in animal species and natural system. These serve
+similar adaptive functions when it comes to self-preservation,
+survival and efficiency.
+Self- bias and selective perception are exhibited by some
+animals on environmental cues most beneficial to their survival
+like predators focusing on weaker 0r injured prey perceived as
+“easier targets” increase their hunting success. This is akin to
+humans selectively interpreting information that confirms their
+beliefs
+The balance of nature bias is visible as feedback loops in
+ecosystems where the perception of priority is given to certain
+states. For instance, in predator and prey dynamics, a sudden
+increase in prey may lead to a rise in predator numbers, which
+eventually reduce the prey population, stabilizing the system
+once more.
+Cognitive dissonance, as psychological discomfort arising
+from conflicting beliefs or contradictory actions to those beliefs,
+relates to cognitive bias as the latter is an emergent strategy to
+resolve the former. This could manifest as confirmation,
+self-serving or status quo biases. They illustrate to how the mind
+works to maintain a cohesive self-view, regardless of the cost to
+accurate self -awareness.
+Some herbivorous mega fauna prefer to stay within the herd
+for safety, even if venturing away could potentially bring new
+food sources. This tendency to avoid unfamiliar situations is
+18
+M.W.E. WIGMAN
+
+similar to humans with avoiding change due to uncertainty,
+confirming the status quo preference.
+However, when faced with conflicting needs such as hunger
+versus safety, animals may adopt behaviors that reduce chances
+of direct confrontation. This is almost similar to cognitive
+dissonance encouraging humans to find ways to avoid
+discomfort. In ecological systems that are under stress, the initial
+resistance to change may be met by a sudden shift to a new
+state when a specific “tipping point” is crossed. This mimics how
+humans are forced to make a change when the inconsistency is
+too strong to ignore.
+• Maynard Smith, J. (1982). Evolution and the Theory of
+Games. Cambridge University Press.
+• Hamilton, W. D. (1971). "Geometry for the selfish
+herd." Journal of Theoretical Biology, 31(2), 295-311.
+• Real, L. A. (1991). "Animal choice behavior and the
+evolution
+of
+cognitive
+architecture."
+Science,
+253(5023), 980-986.
+• Holling, C. S. (1973). "Resilience and stability of
+ecological systems." Annual Review of Ecology and
+Systematics, 4(1), 1-23.
+• Scheffer, M., et al. (2001). "Catastrophic shifts in
+ecosystems." Nature, 413(6856), 591-596.
+• Levin, S. A. (1998). "Ecosystems and the biosphere as
+complex adaptive systems." Ecosystems, 1(5), 431-436.
+The importance of critical thinking is underscored with a
+need to challenge initial perceptions when outcomes are
+evaluated and causes attributed since they are often predefined
+THE NINE STITCHES
+19
+
+by preexisting beliefs and the limitations of one’s own cognitive
+processes. Only then can a more nuanced understanding of
+success and failure be cultivated.
+The psychology of self-sabotage as a form of self-destructive
+behavior can be manifested in different ways, often leading to
+unexpected outcomes. Understanding this can lead us to
+approach it with more curiosity and less judgement. This
+potentiality can lead to avenues for growth innovation and
+discovery.
+In nature, autotomy is a defense mechanism where an animal
+voluntarily sheds a body part, typically to escape a predator. This
+is seen in many lizard species such as geckos, which can detach
+their tails when threatened. This behavior might appear
+self-sabotaging at first glance, however, it often leads to
+unexpected outcomes.
+Immediate survival is one, as the continuous tail wiggling
+distracts the predator, energy conservation while the tail is
+absent, regeneration and adaptation to future attacks, and an
+overall survival and evolution of the species through a
+successfully adopted mechanism.
+• Higham, T. E., & Russell, A. P. (2010). Flip, flop and
+fly: modulated motor control and highly variable
+movement patterns of autotomized gecko tails. Biology
+Letters, 6(1), 70-73.
+• Cooper, W. E., Jr., & Smith, D. R. (2009). Escape
+behavior in autotomous species: advantages of tail loss
+in preventing predation. Ethology, 115(7), 662-670.
+20
+M.W.E. WIGMAN
+
+This self-sabotage analogy has also been supported by other
+studies showcasing the potential drawbacks with effects on the
+lizard’s long-term survival and reproductive goals. Although
+immediate survival is increased, the trade off in terms of mobility
+and social hierarchy is documented. This does, in a sense,
+increase their vulnerability to future predation during the
+regrowth period.
+Thus, parallels can be drawn with humans in terms of
+behaviors driven by “flight or fight” response. This reflects an
+instinctual bias whose cost-benefit analysis shifts bases on other
+pressures such as environmental, predatory and social structures
+within the population. Further drawing reference to support a
+nuanced view of adaptation and self-preservation.
+• Bateman, P. W., & Fleming, P. A. (2009). To cut a long
+tail short: a review of lizard caudal autotomy studies
+carried out over the last 20 years. Journal of Zoology,
+277(1), 1-14.
+• Clause, A. R., & Capaldi, E. A. (2006). Caudal
+autotomy and regeneration in lizards. Journal of
+Experimental
+Zoology
+Part
+A:
+Comparative
+Experimental Biology, 305(12), 965-973.
+• Arnold, E. N. (1984). Evolutionary aspects of tail
+shedding in lizards and their relatives. Journal of
+Natural History, 18(1), 127-169.
+• Maginnis, T. L. (2006). The costs of autotomy and
+regeneration in animals: a review and framework for
+future research. Behavioral Ecology, 17(5), 857-872.
+THE NINE STITCHES
+21
+
+Procrastination is a common form of self-sabotage, where
+individuals delay necessary tasks through underestimating the
+time required to complete the task or by overestimating their
+own skill. This behavior undermines their productivity but can,
+however, result into unexpected beneficial outcomes, making it
+paradoxical.
+Some of the underlying factors might include fear of failure
+or perfectionism, lack of motivation or interest in the task,
+cognitive overload or mismanaged priorities. Generally, as a
+harmful behavior, the delayed action might lead to positive or
+neutral outcomes and often unintentionally.
+Creative
+breakthroughs,
+redundancy
+avoidance
+and
+spontaneous problem-solving might be the unexpected results.
+These, in turn, can reinforce the behavior, engaging a cycle that
+can breed an over-reliance on last minute efforts and
+perpetuated anxiety.
+As a highlighted potential for human adaptability under
+pressure, the importance of self-reflection is necessary to gain
+insight on the role of time and the need to reclaim intentionality.
+Serendipitous problem solving can be either due to genuine
+ability or sheer luck and recognizing this can become a valuable
+opportunity for growth.
+A final point of consideration is the influence that societal
+expectations have on our definition of success. Often this is
+a narrow and unrealistic standard whose influence can have
+profound effects on individual goals, self-worth, and overall life
+satisfaction. These expectations stem from cultural norms, media
+portrayal,
+generation
+differences,
+professional
+standards,
+gender-based expectations and educational benchmarks.
+22
+M.W.E. WIGMAN
+
+Individualistic
+cultures
+favor
+entrepreneurship
+while
+collectivistic
+cultures
+favoring
+familial
+and
+communal
+obligations. Education systems often emphasizing standardized
+achievements like grades and degrees in STEM fields or
+corporations over vocational skills, while idealized versions of
+success are presented as curated lifestyles filled with material
+wealth, luxury travel and physical perfection.
+Psychologically, the impact of societal expectations can lead
+to mass adoption without self-reflection to their alignment with
+personal values, breeding zone for fear of failure and discouraged
+risk-taking
+and
+unconventional
+paths.
+Mental
+health
+implications such as burn outs, anxiety and depression are likely
+to result due to social comparison.
+As such the nature of success is one that is evolving across
+generations,
+through
+recognized
+global
+and
+cultural
+diversification, resulting in pursuits of non-linear paths and
+multi-dimensional success trails. Prioritized holistic success
+values
+work-life
+balance,
+mental
+health,
+environmental
+sustainability, social equity and quality of life over economic
+milestones.
+Striking a balance between personal and societal definitions
+involves critical self-reflection, mindfulness, education and
+awareness, to finding alignment with a celebration of diverse
+successes. This allows individuals to develop their own
+personalized, fulfilling and sustainable approach to achieving
+their goals.
+In nature, honeybee colonies have a societal framework
+where every bee is expected to perform specific roles based on its
+age and the needs of the hive, such as cleaning, feeding, foraging
+and guarding with the colony functioning as a highly structured
+THE NINE STITCHES
+23
+
+“society” with the collective goal of its survival and reproduction
+dictating each bee’s role.
+Deviations from expected roles have been observed due to
+environmental
+changes
+or
+internal
+factors
+showcasing
+individuality such as forager bees not foraging and older bees
+reverting to roles typically assigned to younger bees. In times of
+colony stress such as population loss it can sometimes prove to
+be beneficial.
+A demonstration of the colony’s adaptability through energy
+conservation and flexibility can be perceived as positive
+outcomes, whereas reduced foraging can lead to lack of food
+stores and risk of collapse due to an imbalance of necessary tasks.
+This acts as a mirror to human dynamics, where societal
+expectations guide the collective success but may not align with
+individual needs or environmental realities. When there is
+deviation from the norm, personal fulfillment or innovation my
+rise, however, disruption from harmony might ensue.
+A balance is therefore advocated with an embrace of
+flexibility and adaptation to changing conditions, highlighting
+the importance of individuality within a structured framework.
+• Seeley, T. D. (1995). The Wisdom of the Hive: The
+Social Physiology of Honeybee Colonies. Harvard
+University Press.
+• Robinson, G. E. (1992). Regulation of division of labor
+in insect societies. Annual Review of Entomology, 37(1),
+637–665.
+In this chapter we’ve explored the complex interplay
+between intention and outcome. We’ve examined how our
+24
+M.W.E. WIGMAN
+
+attempts to succeed or fail often lead to unexpected results.
+We’ve also seen how our perceptions are shaped by cognitive
+bias; how self-sabotage can yield surprising benefits and how our
+definitions of success can be influenced by societal expectations.
+These insights have revealed an intricate connection between
+individual experiences and the broader world that surrounds us.
+As we move forward, we’ll delve into the nature of adversity,
+examining the cyclical nature of setbacks and growth. we shall
+explore how they contribute to personal growth and collective
+resilience.
+THE NINE STITCHES
+25
+
+
+Chapter 2
+27
+
+I
+f you can’t evade it, embrace it.
+Adversity refers to a state of difficulty or misfortune that
+disrupts the status quo challenging an individual, ecosystem, or
+system to adapt, persevere, or evolve. It often follows a natural
+pattern that is cyclical with setbacks initially manifesting as
+disruptions that frequently paving the way for long-term growth.
+Systems, whether biological or psychological have proven
+to flourish through overcoming challenges catalyzed by the
+interplay found between pain and progress. As such, adversity as
+a precursor to significant development should be synonymous.
+A common thread can be woven through man and nature as
+immediate pain meets resilience and growth.
+Emotional distress can stem from failure or loss within the
+contexts of personal development, athletic achievement or career
+transitions, which one might consider as immediate pain.
+However, the ultimate contribution to growth as a driving force
+is through reassessment of trajectories that lead to development
+of new skills, which align better with one’s passions and
+strengths.
+A perfect example is Steve Jobs, who, after being ousted from
+the company he co-founded, founded other companies and
+through his experiences enabled him to lead Apple to
+unprecedented success upon his return. Have you ever faced a
+setback that, in hindsight, led to personal growth?
+• Isaacson, W. (2011). Steve Jobs. Simon & Schuster.
+An example that is relevant to all is muscle growth, which
+occurs through a process of stress and recovery. When stressed
+through exercise, muscles experience micro-tears, and during the
+28
+M.W.E. WIGMAN
+
+recovery period, the body repairs these tears, resulting in
+stronger, larger muscles. This mimics the adversity-growth cycle.
+• Schoenfeld, B. J. (2010). The mechanisms of muscle
+hypertrophy
+and
+their
+application
+to
+resistance
+training. Journal of Strength and Conditioning Research,
+24(10), 2857–2872.
+In nature, forest fires are perceived as a destructive force
+but are part of a natural cycle of renewal. The adversity of fire
+clears old growth, releasing nutrients into the soil and allowing
+new, diverse flora to flourish. Lodgepole pines need the intense
+heat from fires to open the pine cones, allowing the seeds to
+be released and to germinate in the nutrient-rich post-fire
+environment.
+• Pausas, J. G., & Keeley, J. E. (2009). A burning story:
+The role of fire in the history of life. Bioscience, 59(7),
+593–601.
+• Turner, M. G., et al. (1994). The Effects of Fire on the
+Landscape
+Structure
+of
+the
+Northern
+Rocky
+Mountains. Journal of Vegetation Science, 5(5), 477-484.
+The overall progress of life on earth is driven by the
+challenging nature of the environment that forces species to
+adapt and grow stronger or face extinction. These environmental
+pressures serve as the adversities, and adaptations represent the
+growth. This is the foundation upon which the theory evolution
+is based.
+THE NINE STITCHES
+29
+
+Within this contrast is a balance that one should recognize.
+Immediate pain serves a purpose as a crucial protective
+mechanism
+in
+an
+acute
+sense,
+whether
+emotional
+or
+psychological. The challenge to endure immediate discomfort is
+motivated by the expected long-term benefits. It is from this that
+resilience is born, and individuals can alter their perceptions to a
+positive and adaptive mindset.
+From the individual level, psychological resilience extends
+to the cultural and societal perspective, demonstrating a similar
+aptitude for adaptability. This often leads to significant
+innovations and increased cooperation between communities
+and society at large. Examples of this can be seen in climate
+change adaptation, disaster response, economic crises, and
+technological disruptions.
+The 1986 Chernobyl disaster led to a two-fold adaptation
+outcome. For humans, nuclear safety improved in terms of
+protocols used and technology. There was also an increase in
+global cooperation with information sharing transcending
+national borders. For nature, as a unique laboratory to study
+long-term effects of radiation on ecosystems, the unexpected
+natural cycle of recovery and regeneration in the affected
+ecosystems has been observed. The absence of human activity
+allowed nature to reclaim the areas, highlighting the resilience
+after adversity.
+• Mousseau, T. A., & Møller, A. P. (2011). Landscape
+portrait: A snapshot of the effects of radioactive
+contaminants on animal populations. Journal of
+Environmental Radioactivity, 102(8), 980–983.
+• National Geographic. (2016). Chernobyl: 30 Years
+30
+M.W.E. WIGMAN
+
+Later, Wildlife Thrives.
+A crucial point when it comes to adapting to adversity
+through developing resilience is understanding the role of
+perspective. Old problems can be seen with new awareness,
+allowing an ability to foster flexibility, which then becomes a
+coping mechanism to resilience in challenging moments.
+Mentally, interrupting automatic negative thoughts (ANTs) can
+activate different brain circuits.
+This involves recognizing and challenging patterns of
+habitual, negative self-talk or cognitive distortions. In practice,
+different neural circuits are activated in the brain, shifting
+activity from areas associated with stress and negativity towards
+regions linked to regulation, positivity, and problem solving.
+Cognitive reappraisal happens in the prefrontal cortex (PFC),
+which is responsible for higher-order thinking and emotional
+responses
+regulations.
+Through
+thought
+reframing,
+the
+amygdala is downregulated.
+• Ochsner, K. N., & Gross, J. J. (2005). The cognitive
+control of emotion. Trends in Cognitive Sciences, 9(5),
+242-249
+Repeatedly challenging ANTs can lead to neuroplastic
+changes, which strengthen neural pathways associated with
+positive and rational thought. It reduces the influence of
+negative thought loops over time. Practical techniques include
+thought-stopping exercises like mentally shouting “Stop,”
+physically shaking your head, or snapping a rubber band on your
+wrist to break the thought loops and shift focus. Self-compassion
+THE NINE STITCHES
+31
+
+practices involve acknowledging negative thoughts without
+judgement and replacing them with kinder, more constructive
+narratives.
+• Wegner, D. M. (1994). Ironic processes of mental
+control. Psychological Review, 101(1), 34-52.
+• Neff, K. D. (2003). Self-compassion: An alternative
+conceptualization of a healthy attitude toward oneself.
+Self and Identity, 2(2), 85-101.
+Psychologically this has proven useful in approaches like
+cognitive behavioral therapy (CBT) and positive interventions
+using techniques like gratitude journaling or affirmations.
+Fostering a healthier and more adaptive mental framework
+contributes to the improvement of mental well-being and the
+acquisition of long-term resilience.
+• Beck, A. T. (1976). Cognitive Therapy and the
+Emotional Disorders. Penguin Books.
+• Seligman, M. E. P. (2011). Flourish: A Visionary New
+Understanding of Happiness and Well-being. Free Press.
+As
+a
+universal
+principle,
+nature
+demonstrates
+that
+interrupting destructive or unsustainable processes often lead to
+recovery, adaptation and growth. In plant tropisms, behaviors
+such as phototropism (growth toward light) and gravitropism
+(growth in response to gravity) are prevalent when conditions
+are suboptimal. Course correction in response to environmental
+stimuli mirrors the human brain’s ability to change course
+through neuroplasticity when negative patterns are challenged.
+32
+M.W.E. WIGMAN
+
+• Kiss, J. Z. (2000). Mechanisms of the early phases of
+plant gravitropism. Critical Reviews in Plant Sciences,
+19(6), 551-573.
+One’s
+understanding
+is
+broadened,
+with
+the
+acknowledgment of multiple valid view points on a situation.
+This encourages an open-minded approach that can be through
+reframing. The challenge viewed as an opportunity for growth
+and learning rather than just a setback, allowing one to quickly
+bounce back from adversity.
+Perspective also helps to identify what is within one’s control
+and where support is needed by accounting for both
+opportunities and challenges, resources, and limitations. This
+balance then influences our individual reality by transforming
+one’s experience of events through the perception of situations.
+A means of cultivating new perspective is through practicing
+mindfulness, self-reflection and seeking diverse viewpoints. By
+observing
+and
+interrupting
+automatic
+thoughts
+without
+judgment, brain activity is shifted towards the default mode
+network (DMN), facilitating self-awareness and emotional
+balance.
+• Hölzel, B. K., et al. (2011). Mindfulness practice leads
+to increases in regional brain gray matter density.
+Psychiatry Research: Neuroimaging, 191(1), 36-43.
+Actively pursuing different sources of information broadens
+understanding and ideally, one must step outside of one’s self
+to be able to questions and challenge one’s own preconceived
+assumptions and biases. Essentially, more flexible thinking,
+THE NINE STITCHES
+33
+
+better problem solving, increased empathy and an overall
+capacity to find opportunity for growth under challenging
+circumstances is allowed through the ability to shift perspective.
+Thus, perspective acts a lens through which adversity can
+be interpreted, responded to, and grown from. Embracing this
+instead of trying to evade it, is what determines whether setbacks
+are seen as failures or stepping stones toward growth. This
+dynamic also shifts with time as what initially seems destructive
+can eventually be recognized as a turning point for growth.
+A growth mindset allows an intrinsic appreciation of
+adversity and its necessity for evolution. Neither good nor bad,
+it only serves to be a neutral force that drives adaptation. These
+cyclical rhythms of set back and renewal need only be met with
+a balanced perspective that reinforces the approach and not the
+event itself.
+Alternatively, when there is a lack of movement, growth or
+change, stagnation occurs. The perception of insurmountable
+challenges rather than opportunities for growth due to the
+inability to reframe adversity, drives the failure of progress. Fear
+can anchor one to inaction. This prevents the necessary
+engagement with adversity that would lead to growth.
+Complacency patterns also limit growth owing to the state
+of vulnerability they expose. Coupled with a narrow perspective
+that focuses on inadequacies, they prolong stagnation. With
+adversity as the discomfort needed to kindle change, a growth
+perspective must be adopted. Sometimes even induced and
+controlled artificial adversity would be necessary to stimulate
+growth and break the stagnation.
+Awareness to the cyclic nature of adversity, brings the
+realization that stagnation is a phase, seen as a pause or reset
+34
+M.W.E. WIGMAN
+
+within the rhythm. One that risks becoming a trap without
+perspective
+and
+intentional
+disruptive
+action.
+Complete
+embrace of adversity ensures the temporary stop that is
+stagnation, serves to pave the way for growth.
+• Perspective Shift:
+Recognize
+that
+stagnation
+is
+temporary and can serve as a precursor to growth.
+• Intentional Disruption: Embrace adversity by taking
+deliberate actions to break through stagnation.
+• Resilience Cultivation: Understand that challenges
+build resilience, leading to further growth.
+AN INHERENT TRAIT THAT stems from the growth
+sparked by adversity is the continued cultivation of resilience
+with the foresight of eventual and inevitable uprising of further
+adversity. Challenges beget resilience, which in turn breeds
+THE NINE STITCHES
+35
+
+growth, and further on stagnation which demands more
+challenges. This is true either individually, societally or naturally.
+Preparation for future adversity starts with risk assessment
+and scenario planning. One must be able to identify potential
+future challenges through brainstorming the expected driving
+forces which typically fall into categories like environmental,
+technological, political, economic and social. Uncertain forces
+getting more priority due the nature of their unpredictability.
+Their unprecedented nature limits one’s ability for preparation
+against them, making them more impactful.
+An assessment of capability to evaluate strengths and
+weaknesses
+internally
+and
+externally,
+as
+well
+as
+future
+opportunities and potential threats, is intrinsic—otherwise
+known as a SWOT analysis. This is replicated for multiple
+scenarios and uncertainty is further accounted for, by creating
+narratives with contrasts, considering best-case or worst-case
+extremities, and incorporating diverse information. Imagination
+should account for the realization that the future might not look
+anything like the past due to the lack of precedence.
+From this initial assessment, an adaptive capacity can be
+built primarily through enhancing flexibility in processes and
+systems as well as diversifying skill sets and resources. Within
+organizations this can take the form of cross-functional
+collaborations and the adoption of agile methodologies to help
+in quick responses.
+Furthermore, a diverse set of skills makes one more adaptable
+and resilient. The ability to draw upon knowledge from different
+fields and apply it to different situations becomes a highly
+competitive advantage. This, coupled with collaboration from
+36
+M.W.E. WIGMAN
+
+other like-minded individuals with complementary skills who
+are continuously learning is essential.
+This recipe ultimately leads to increased resilience and
+success in the face of adversity for individuals and organizations.
+In nature, the exhibition of adaptive capacity allows for response
+to environmental changes and stresses, akin to the lodgepole
+pine trees with serotinous cones that remain sealed with resin
+until exposed to high temperatures from wild fires. Upon which
+the seeds are released into the nutrient-rich, ash-covered soil
+ensuring growth.
+Such systems highlight the idea of thriving in chaos and
+disorder, leveraging stress to become stronger in its aftermath.
+This is the concept of antifragility; it highlights the need for
+redundancy and variety in options under various scenarios.
+Decentralization being a key strength over the vulnerability
+from single points of failure. The nature of failure is equally
+elemental to the overall improvement of the process, and stress
+merely serves to catalyze system strengthening.
+In human biology, the immune system exhibits this through
+natural and controlled pathogen exposure that facilitates bracing
+against future infections. Muscle growth also showcases a similar
+dependency to thrive on the chaos of stresses in strength training
+resulting in microtears, which in turn lead to healing and the
+repairing of these muscles, building them more robustly.
+Seed dormancy in dessert plants is equally illuminating.
+Absolute necessity for action stemming from alignment to
+optimal conditions—in this case, germination after rainfall. A
+combination of resilience and antifragility becoming the
+hallmarks that leverages growth.
+THE NINE STITCHES
+37
+
+• Taleb, N. N. (2012). Antifragile: Things That Gain
+from Disorder. Random House.
+• Bouchard, C., & Loehle, C. (2018). Antifragility in
+ecosystems. Ecological Modelling, 368, 201-211.
+To be fully engulfed in the rhythms of progress, one’s
+acknowledgement of the cycles of adversity and growth is
+imperative. Missing the initial warning for immediate action
+justifies the needed reinforcement that adversity provides—a
+mere neutral reaction that should be treated as such with a
+growth mindset. An understanding of the psychological aspect
+and the philosophical concepts about this comprehensively
+come part and parcel to the entire dynamic.
+Psychological research has shown that individuals with a
+growth mindset are less prone to mental health problems and
+are better able to cope in stressful scenarios. It also points out a
+higher state of well-being, characterized by enhanced resilience,
+self-compassion, and self-esteem that acts as a protective layer
+against
+the
+development
+of
+mental
+health
+conditions.
+Additionally,
+improved
+academic
+outcomes,
+increased
+motivation and engagement in learning, reduced anxiety and
+stress, and decreased perfectionism serving as positive feedback.
+• Dweck, C. S. (2006). Mindset: The New Psychology of
+Success. Random House.
+• Masten, A. S. (2001). Ordinary magic: Resilience
+processes in development. American Psychologist, 56(3),
+227–238.
+38
+M.W.E. WIGMAN
+
+Philosophically, the concepts about the rhythms of
+progress through experiences of adversity can be accentuated by
+the ideas initially discussed. Those being, adversity as a naturally
+inherent trait to the role of human experiences, antifragility and
+the non-linear but rather cyclical conditioning of progress. All
+this underscores the debate about whether human nature is fixed
+or malleable, hence aligning it to the static versus growth
+mindset.
+Furthermore, the concept of “amor fati” as a philosophy that
+emphasizes the embrace of challenges and hardships as integral
+to personal growth and strength. Stated as what doesn’t kill me
+makes me stronger. Belief, in the form of faith, can fortify
+individuals in the face of seemingly insurmountable adversity.
+Human flourishing, or originally “eudaimonia” is a similar
+concept that sustains the idea of growth arising through the
+practice of virtues such as courage and perseverance. Stoicism as
+a philosophy features an emphasis on the lack of control over
+external events but an appreciation of it coming from the
+perception and the response to them. Also, adversity is seen as an
+opportunity for growth, character building and self-discovery.
+The concept of a dialectic approach involves a process that
+explores ideas through dialogue, questioning, and synthesizing
+opposing viewpoints with the aim of resolving contradictions by
+evolving understanding to arrive at deeper insights. It enhances
+the growth mindset by providing a structured approach to
+navigate and integrate different perspectives, fostering a deeper,
+more resilient form of personal and intellectual growth.
+In a Hegelian manner, developmental growth can be
+understood through the process of thesis, which is the fixed
+mindset and cannot be changed, the antithesis, which emerges
+THE NINE STITCHES
+39
+
+as challenges and contradictions are encountered, and synthesis,
+which is the resolution to the conflict by recognizing the limits a
+fixed mindset imposes and thus adopting a growth mindset.
+This framework sees the growth mindset as an evolved
+understanding that reconciles the fixed mindset with the need
+for continuous improvement and adaptation. It highlights the
+dynamic process of personal development where each stage
+builds upon the previous one, refining the understanding of
+one’s potential. Thus, the transformative power of adversity and
+learning experiences is fully appreciated by design.
+• Nietzsche, F. (1998). Twilight of the Idols. Oxford
+University Press.
+• Kierkegaard, S. (1985). Fear and Trembling. Penguin
+Classics.
+• Aristotle. (2009). Nicomachean Ethics (M. Ostwald,
+Trans.). Prentice Hall.
+• Epictetus. (1995). The Enchiridion. Dover Publications
+• Seneca. (1969). Letters from a stoic (R.M. Gummere,
+Trans.). Penguin Classics.
+• Marcus Aurelius. (2002). Meditations (G. Hays, Trans.).
+Modern Library.
+• Hegel, G. W. F. (1977). Phenomenology of Spirit (A. V.
+Miller, Trans.). Oxford University Press.
+All these philosophies offer profound insights into how
+adversity and growth are interlinked with a common thread
+weaving through the insights on resilience, personal growth, and
+the flourishing of humanity. By incorporating psychological
+findings as well, we gain an extensive view of how understanding
+40
+M.W.E. WIGMAN
+
+and embracing the revolving nature of adversity and growth
+leads to more sustainable success and fulfilment.
+As we conclude this chapter, we have understood that
+through the immediate pain of failure, and the long-term
+benefits it can yield, adversity is recognized as an integral part
+of existence for both man and the world. A growth mind set
+rewards the resilient, offering an altered perspective to welcome
+challenges, and thrive from them. The inevitability of adversity
+sustains the journey of the collective momentum toward
+progress and eventual contentment.
+Looking ahead, the next chapter shall delve into the
+subjective nature of flaws and their essential role in defining
+uniqueness. By challenging conventional notions of perfection,
+we hope to reframe limitations as powerful catalysts for
+innovation. Embracing imperfection as potentials for creativity
+and originality, disguised as constraints.
+This transition —from intention and non-linear outcomes
+to
+understanding
+adversity
+and
+soon
+appreciating
+imperfection—will further illuminate the intricate threads that
+compose the fabrics of existence. A revelation for which diversity
+and potential richly interweave a tapestry.
+THE NINE STITCHES
+41
+
+
+Chapter 3
+43
+
+T
+he Elegance of Flaws.
+Perfection
+is
+often
+attributed
+to
+a
+state
+of
+flawlessness; the highest standard of excellence one can ascertain.
+It represents the ideal form of something, where every element
+aligns seamlessly without errors. Perfection can also be
+subjective, allowing it to adopt different interpretations across
+varying cultures, perspectives, and individual beliefs.
+This might look like precision and completeness, as seen in
+equations in mathematics or tasks that are executed flawlessly.
+An abstract view might reflect on beauty, harmony or fulfillment
+in personal or creative endeavors. Perfection can inspire growth
+and excellence, but a balanced pursuit with the acceptance of
+imperfections often brings depth, uniqueness and a sense of
+humanity to experiences.
+The futility of pursuing perfection as an objective standard
+highlights it subjectively as a desirable trait, as it is dependent on
+perspective. After all, it is said that beauty lies in the beholder’s
+eyes. Thus. perfection lacks a universal definition.
+From a cultural perspective, the skin carries significant
+standards. The Western culture view tans more fitting while the
+Eastern cultures seeing more appeal to fair complexions. The
+body within which the skin encapsulates also has a varying
+idealized form dependent on culture and time periods. During
+the European renaissance, fuller figures were considered the
+epitome of beauty, whereas now different cultural media streams
+promote slimmer bodies or particular features that would
+accentuate this notion.
+Similarly, facial features such as a pronounced jawline, fuller
+lips or specific eye aesthetics hold value or lack it, based on
+geography. Personal taste applies beyond physical appearance to
+44
+M.W.E. WIGMAN
+
+the value awarded in art and other aspects. Emotional value as
+seen in sentiment, could further nuance the interpretation of
+value.
+Beyond culture and personal factors, context is a contender,
+as what is conceived as a perfect physique varies across
+professions like sumo wrestling and ballet dancing. Historical
+context might have ideals supplanted by others over time, such
+as the Habsburg jaw, seen as a sign of royalty or nobility, but
+now highlighting a genetic architecture involving mandibular
+prognathism likely propagated by high levels of consanguinity
+and requiring orthodontic treatment.
+• Zamudio Martínez, G., & Zamudio Martínez, A.
+(2020). "A Royal Family Heritage: The Habsburg Jaw."
+Facial Plastic Surgery & Aesthetic Medicine, 22(2),
+120–121. DOI: 10.1089/fpsam.2019.29017.mar.
+Philosophical perspectives, such as the Theory of Forms,
+suggest that perfection is unattainable in the physical world,
+instead, there exists a realm of perfect, immutable, and eternal
+Forms or Ideas, which are the true essence of all things. The
+Japanese concept of wabi-sabi embraces imperfection as part of
+the natural order. Science idealizes models that don’t exist in
+reality, such as a frictionless surface and perfect circles in physics
+and mathematics.
+• Plato, Republic, translated by G. M. A. Grube, revised
+by C. D. C. Reeve, Hackett Publishing, 1992.
+THE NINE STITCHES
+45
+
+The idea that humans are part of a larger whole, with the
+perception of separation as an optical delusion of consciousness,
+aligns with deep ecology. This philosophy emphasizes the
+interconnectedness and intrinsic value of all living things,
+moving beyond the veil of anthropocentricism to more
+eco-centric perspectives. Perceived imperfections in other
+species, with minimal utility to human needs, such as
+mosquitoes and cockroaches, are transcended to a broader
+awareness of the interconnected web of life and their place
+within the biosphere.
+• Naess, A. (1973). The Shallow and the Deep,
+Long‐Range Ecology Movement. Inquiry 16(1-4):
+95-100.
+• Einstein, A. (1950). Ideas and Opinions. Crown
+Publishers, New York.
+Biological plurality showcases the advantageous nature of
+genetic diversity within the environment as perfect genetic
+makeup doesn’t exist. What is beneficial in one system might be
+detrimental in another; for instance, the thick fur of polar bears
+is perfect for arctic climates but would be disadvantageous in
+warmer regions.
+Many natural phenomena illustrate how imperfections
+contribute to resilience and function. The complexity of
+structures supports diverse life forms and enhances stability
+against environmental stressors. Natures mode of operation is
+through a dynamic equilibrium rather than a static form of
+perfection. The ecosystem’s ability to constantly adjust and
+self-regulate
+through
+feedback
+mechanisms
+depicts
+the
+46
+M.W.E. WIGMAN
+
+successful
+achievement
+of
+balance
+through
+continuous
+adaptation rather than a retained fixed state.
+Technological advancements in the role of media influence
+portray perfection as unrealistic standards, varying across
+different platforms and target audiences with the use of filters
+and photo editing tools to blur the lines of reality.
+Recognizing the subjective nature of perfection can
+liberate individuals to define their own standards of success and
+beauty, overcoming the psychological implications of pursuing
+its unattainable objectivity at the cost of mental health. This
+encourages a more inclusive appreciation of beauty, talent and
+achievement prioritizing individual differences over a universal
+standard of perfection to aspire for. This realization fosters
+greater self-acceptance and a nuanced understanding of human
+diversity and potential.
+A flaw is an imperfection, weakness, or defect that can
+appear in various contexts. Personal flaws might be referred to
+character traits hindering personal growth or relationships.
+Psychological theories highlight how these flaws emerge in the
+spectrum of human behavior.
+From a structural point of view, a flaw might be a weakness
+in a material or design compromising its integrity. Logically,
+flaws might be errors that undermine the validity of a
+conclusion, like ad hominem attacks or false dichotomy.
+Embracing these flaws gives them life as powerful symbols of
+individuality, converting them into appealing features. Physical
+imperfections, quirks, and eccentricities become distinguishing
+features and memorable traits.
+The philosophy of wabi-sabi, rooted in Zen Buddhism and
+Shinto traditions, emphasizes the beauty of imperfection,
+THE NINE STITCHES
+47
+
+transience, and incompleteness. This view point encourages the
+appreciation of things as they are, inclusive of flaws,
+irregularities, and the inevitability in the cycle of growth and
+decay. An example is kintsugi, the art of repairing broken pottery
+with gold to highlight the cracks
+• Saito, Y. (1997). The Japanese aesthetics of
+imperfection and insufficiency. The Journal of Aesthetics
+and Art Criticism, 55(4), 377-385. https://doi.org/
+10.2307/431925
+The
+benefits
+of
+embracing
+imperfections
+reflect
+psychologically with increased self- acceptance and self-esteem,
+reduced anxiety and stress related to perfectionism, and greater
+resilience in the face of criticism. When culture shifts towards
+authenticity, there is appreciation for increased visibility in
+diverse representations and a celebration of authentic unfiltered
+content.
+The deliberate use of asymmetry in modern art, vintage
+looks in fashion, and interior design as well as the value in
+hand-made artisanal products for their uniqueness, is another
+means to embrace imperfections and foster appreciation.
+Reframing this perspective of embracing one’s flaws acts a
+catalyst for innovation, sparking creativity beyond conventional
+boundaries.
+The leaning tower of Pisa is a classic example of this. As a
+globally recognized architectural marvel in Italy, its famous tilt
+has captivated people worldwide. The tilt, caused by unstable
+foundation soil, did not stop its completion but allowed for
+adjustments. Later on, its restoration ensured it remained stable,
+48
+M.W.E. WIGMAN
+
+even surviving earthquakes over the centuries. The flaw from
+the soil also gave the tower flexibility in a phenomenon called
+dynamic soil-structure interaction, which dampens seismic
+waves.
+• Brenna, G. (2010). The Leaning Tower of Pisa:
+Engineering and Geotechnical Perspective. International
+Journal of Architectural Heritage, 4(1), 1-14.
+DOI: 10.1080/15583050903311635
+By viewing flaws through the lens of elegance, one can shift
+the perspective from seeking perfection to appreciating the
+unique beauty that imperfection presents.
+Vulnerability often seen as a weakness, can lead to profound
+personal and social benefits. It is the birth place of innovation,
+creativity, and change. Vulnerability fosters trust through
+strengthening interpersonal connections, enabling one to feel
+seen, heard, and valued.
+It represents emotional courage that transcends superficial
+interactions. From a neurological perspective, vulnerability
+triggers the release of oxytocin, reduces cortisol levels, and
+activates mirror neurons, promoting trust and bonding,
+reducing stress, and enabling empathic connections.
+Practically, this can be manifested in personal, social and
+professional
+environments.
+Its
+contagious
+nature
+allows
+reciprocity and loyalty from teams with leaders who show
+vulnerability, increased organizational trust, and innovation
+through psychological safety. Social isolation is reduced because
+of genuine understanding, less shame, and decreased social
+anxiety, which promotes emotional resilience. Acknowledging
+THE NINE STITCHES
+49
+
+vulnerability means having the courage to accept one’s flaws
+elegantly.
+• Brown, B. (2012). Daring greatly: How the courage to be
+vulnerable transforms the way we live, love, parent, and
+lead. Penguin.
+In nature, some insects have evolved mimicry as a defense
+mechanism. For instance, the viceroy butterfly resembles the
+toxic monarch butterfly. This adaptation of its vulnerability
+strengthens its survival chances. Another example lies in the
+symbiosis between the clown fish and the sea anemone, a
+relationship crucial for the survival of both species. The sea
+anemone provides protection with its stinging tentacles, while
+the clown fish offers nutrients through its waste, cleaning
+services, and enhancing oxygenation through increased water
+flow.
+• Chadwick, N. E., & Arvedlund, M. (2005). Symbiosis
+between clownfish and sea anemones. Marine Ecology
+Progress Series, 279, 241-251.
+Embracing flaws become a wellspring of creativity, allowing
+for experimentation and risk-taking. Accepting imperfection
+opens one to new possibilities and innovative approaches,
+potentially leading to unexpected breakthroughs and original
+ideas. Flaws add character and authenticity to creative works,
+making them more relatable and human. By channeling this,
+creators are liberated from the pressures of unattainable ideals
+leading to a more fulfilling and sustainable creative process.
+50
+M.W.E. WIGMAN
+
+By accepting one’s flaws, we gain deeper understanding of
+ourselves, leading to improved self-esteem through realistic goal
+setting
+and
+built
+resilience.
+Embracing
+authentic
+self-presentation reduces shame around limitations, and progress
+is celebrated in incremental steps. Detachment from the
+idealized self provides room for existential acceptance and
+embraced human complexities.
+As a catalyst with the transformative potential of personal
+evolution, the external manifestation of embraced flaws becomes
+improved
+interpersonal
+relationships,
+enhanced
+problem-solving capabilities, increased emotional flexibility, and
+reduced performance anxiety. Perfection is deeply ingrained in
+many cultures but, as a pervasive social myth of bodily and
+cognitive perfection, it is fundamentally flawed. True perfection
+is unattainable for humans as there can never be a universally
+accepted standard due to its subjective nature.
+Cultural and social variations with constantly shifting
+standards coupled with the multidimensional nature of human
+qualities, ensure that perfection remains elusive and its pursuit
+detrimental to mental well-being. It is therefore, imperative to
+challenge this myth by redefining perfection. The term “perfect”
+originates from the Latin “perfectus,” meaning complete of
+finished. Greek philosophy influenced the word, with the idea
+closely linked to teleology, where all things have an inherent
+purpose or “final cause” (telos).
+The focus on completion and purpose, rather than flawless
+precision, allows one to embrace imperfection perfectly through
+recognizing the elegance of flaws as inherent traits of the process.
+An emphasis on healthy striving and cultivated self-compassion
+THE NINE STITCHES
+51
+
+provides room for a more inclusive and realistic view of human
+potential and worth.
+As we conclude our exploration of imperfection’s beauty,
+we’ve uncovered the profound impact of embracing our flaws
+and limitations. As unique identifiers, they catalyze innovation
+and are sources for creativity. By challenging the myth of
+perfection, we open ourselves to authentic connections, personal
+growth, and a more compassionate worldview.
+Embracing imperfection redefines success and beauty on
+more human, achievable terms. It comes across on the path of
+resilience and acts as a key to unlocking self-acceptance and a
+more fulfilling life. This cultivates an empathic society that
+appreciates the cracks, asymmetries, and quirks in one another.
+In the next chapter we will zoom out to examine the intricate
+connections
+between
+individual
+actions
+and
+global
+consequences. We will explore how evidently small, everyday
+choices create ripples that extend beyond our immediate
+surroundings, influencing the larger systems we inhabit.
+Through this survey, the profound interconnectedness between
+the microcosm of our personal lives and the macrocosm of our
+world will gain a new perspective on the power and
+responsibility we each hold in shaping the collective future.
+52
+M.W.E. WIGMAN
+
+Chapter 4
+53
+
+M
+icrocosm and Macrocosm
+The concepts of microcosm and macrocosm
+describe the relationship between individuals and the universe,
+suggesting that each small part reflects and influences the whole.
+The microcosm refers to a small, self-contained world that
+mirrors or represents the characteristics, structure, or dynamics
+of a larger system or the universe as a whole. Originally derived
+from the Greek words “mikros” meaning small and “kosmos”
+meaning world or universe, it means “small world.” It considers
+humans as embodying the same forces and elements that govern
+the cosmos. In modern science, it refers to controlled
+environments that model larger ecosystems and in sociology, it
+describes communities, workplaces or classrooms which can be
+seen as a microcosm of broader societal trends that reflect the
+complexities of the larger society in a confined space.
+The macrocosm, on the other hand, is the larger, overarching
+system
+that
+encompasses
+many
+smaller
+microcosms,
+in
+otherwards the entirety of a complex structure. Its origins stem
+from Greek words “macros” and “kosmos” to mean “large world.”
+Metaphysically, it infers the universe as a whole, with individual
+beings reflecting its harmony. In fields like astronomy or systems
+theory, it refers to large-scale systems such as the solar system,
+galaxies, or global systems, illustrating how individual elements
+fit into the broader framework. Whereas, in sociology a nation,
+or global society can be considered in relation to smaller
+communities and organizations.
+Understanding these interconnected patterns brings forth
+the idea of the butterfly effect suggestion that small actions can
+lead to significant changes. In this context, one can be seen as
+54
+M.W.E. WIGMAN
+
+both a microcosm within the world and macrocosms to their
+own inner systems.
+The thought of the body microcosm in relation to the world
+it inhabits can be through the finite understanding of the world
+as a small infinity compared to the vastness of the cosmos. Thus,
+the microcosm of human knowledge would expand within the
+macrocosm of universal truths even if there would be always be
+a greater infinity of unknowns. On the alternative, the human
+body as a macrocosm, made up of trillions of cells each
+functioning as microcosms, akin to an infinity of complex
+biochemical processes.
+According to set theory, some infinites are larger than
+others. This can be illustrated by considering the macrocosm’s
+infinity as larger because it represents the sum of all the
+microcosmic infinites and their interactions, both known and
+unknown, extending far beyond the limits of any single
+microcosm. The idea that larger, more comprehensive systems
+contain greater infinities can be seen in how the human body
+(a macrocosm) is made up of countless cells (microcosms), each
+with its complex biochemical processes.
+Chaos theory highlights the behavior of complex systems
+that are highly sensitive to initial conditions, known as the
+butterfly effect. This concept, also even in deterministic systems,
+exhibits random, chaotic behavior due to the complexity of the
+interactions. Key characters would be the nonlinearity of
+outcomes, unpredictability, fractals and self-similarity.
+• Capra, F. (1996). The Web of Life: A New Scientific
+Understanding of Living Systems. Anchor Books.
+• Cantor, G. (1874). On a Property of the Collection of All
+THE NINE STITCHES
+55
+
+Real Algebraic Numbers.
+• Lorenz, E. N. (1963). "Deterministic Nonperiodic
+Flow." Journal of the Atmospheric Sciences.
+Through this chapter, we will explore some examples of how
+micro-level actions have led to macro-level changes and how the
+profound impact of personal decisions can have in shaping our
+shared future. Understanding these dynamics will contribute to
+acknowledging the individualized power and responsibilities
+held by life to the larger narrative that is shared. With the most
+visible significance in social dynamics, individualized choices
+shape collective behavior and the initiation of systemic change
+by ultimately triggering societal shifts.
+The civil rights movement catalyzed by the refusal to give up
+a seat on a bus, and the global youth climate movement begun
+with a school strike for climate. In nature such similarities are
+seen with the effect of bees as pollinators which contribute to
+the reproduction of plants on a global scale. Coral polyps equally
+showcase this with the creation of massive reef structures that
+support entire marine ecosystems.
+These actions stemming from personal habits, would
+cumulatively impact the global scene, when the consideration
+is aggregated across millions of lives. Lifestyle choices such as
+driving, meat consumption, energy use, waste production, and
+water use, collectively contribute to carbon emissions, affirming
+the power of collective action. While individual action may seem
+small in isolation, conscious choices in daily life and
+participation in larger collective efforts can lead to significant
+global trends.
+56
+M.W.E. WIGMAN
+
+In relation to carbon emissions and climate change,
+individual choices can significantly affect one’s personal carbon
+footprint. This is based on whether one is on a plant-based diet,
+uses air travel, has to use a vehicle regularly or the number of kin
+they choose to sire.
+In terms of consumer choices, the demand for sustainable
+products, collective preferences such as the rise of electric
+vehicles and consumer sentiment can influence market trends
+and transform entire industries to more eco-friendly practices
+and improved environmental performance.
+Adopting sustainable lifestyle choices, such as reducing
+energy consumption through efficient appliances and mindful
+usage, minimized waste through recycling, composting and
+reduced use of single use plastics, choosing to support local and
+organic food systems, and embracing alternative transportation
+modes like walking, cycling or public transit.
+The effectiveness of these is often mediated by larger political
+and economic systems which vary significantly depending on
+the country’s policies in energy infrastructure. The government’s
+intervention is necessary in crafting systemic changes to
+maximize the effect of individual actions.
+As such, individual impact is amplified by the recognition
+of broader systemic changes that support them. This introduces
+the idea of a keystone, analogous to an architectural arch that is
+crucial to maintaining the integrity of the entire system.
+In nature, a keystone species is an organism that has a
+disproportionately large effect on its ecosystem relative to its
+population size. Its presence or absence significantly impacts the
+structure and function of the system. This can be in the form of
+predators controlling herbivore populations, providing critical
+THE NINE STITCHES
+57
+
+food resources, creating habitats for other species or maintaining
+biodiversity. Examples include wolves regulating elk populations
+in Yellowstone National Park and bees as plant pollinators.
+By acting as a keystone, the government plays a crucial role
+in amplifying individual actions to create significant and
+sustainable changes, particularly in addressing challenges.
+Through policy framework and regulations that incentivize
+sustainable
+practices
+and
+discourage
+harmful
+ones.
+Infrastructural development such as renewable energy sources or
+public transportation systems, and education programs as well
+as public awareness campaigns to inform citizen about
+environmental issues, governments empower individuals to
+make informed decisions.
+The enabling environment that amplifies the impact of
+individual actions can lead to significant and lasting changes
+in society’s approach to sustainability and environmental
+conservation.
+Much to our observations in nature and society, there lies the
+idea of negative or positive keystone agents, whose presence or
+absence has had a significantly disproportionate effect in shaping
+societal structures far beyond their time. This idea is visible in
+the
+ripple
+effects
+of
+social
+behavior,
+illustrating
+the
+interconnectedness of human behavior and its potential for
+wide-reaching impact.
+The key aspects of the ripple effects include social influence
+by affecting the thoughts, feelings and behavior of others. This
+can be seen as conformism in the case of people adjusting their
+behavior to align with a group even when the group’s stance in
+incorrect.
+58
+M.W.E. WIGMAN
+
+Mahatma Gandhi’s philosophy of non-violent resistance
+(satyagraha) played a pivotal role in India’s independence
+movement, with his influence going beyond India, inspiring civil
+rights movements globally. This shifted political strategies by
+demonstrating that peace could lead to significant societal
+change.
+• Reference: Brown, J. M. (1991). Gandhi: Prisoner of
+Hope. Yale University Press
+There is a community impact with a disproportionate
+distribution of social behavior often predicated by different
+demographic groups. In the case of Martin Luther King Jr.,
+whose inspiration from Gandhi’s philosophy drew leadership in
+the American Civil Rights Movement, his assassination led to a
+leadership vacuum that slowed down progress on racial equality
+in the U.S. This disruption of peaceful protests led to increased
+fragmentation in civil right advocacy. The highlighted challenges
+in maintaining nonviolent advocacy and unity without a
+unifying figure emphasize the role of charismatic leadership in
+social movements.
+• Reference: Branch, T. (1988). Parting the Waters:
+America in the King Years 1954-63. Simon & Schuster.
+Social behaviors often create a domino effect, where one
+impact leads to another. An example is the invention of the
+movable-type printing press by Johannes Gutenberg. By
+revolutionizing information dissemination in Europe, the
+Renaissance was sparked, followed by the Reformation and the
+THE NINE STITCHES
+59
+
+Scientific Revolution. This fundamentally reshaped society by
+democratizing
+knowledge,
+transforming
+education
+and
+communication.
+• Eisenstein, E. L. (1980). The Printing Press as an Agent
+of Change. Cambridge University Press.
+Collective action can trigger further ripple effects that
+influence others to follow suit. Greta Thunberg’s environmental
+activism has mobilized millions in the global climate change
+movement, influencing policymakers to address environmental
+issues more seriously with the urgency towards sustainability.
+• Thunberg, G. (2019). No One Is Too Small to Make a
+Difference. Penguin Books.
+Following the media’s influence of social behavior, cultural
+transmission might be affected in terms of norms and practices
+across generations. The impact of the John F. Kennedy’s
+assassination led to unresolved political agendas such as civil
+rights and Cold War diplomacy. It caused significant shifts in
+U.S. politics, affecting public trust and leading to conspiracy
+theories that shaped American culture.
+• Dallek, R. (2003). An Unfinished Life: John F. Kennedy,
+1917-1963. Little, Brown and Company.
+Together with the examples of individual figures serving as
+both negative and positive keystone agents, with their presence
+or absence shaping societal structures, we can understand how
+crucial comprehension of these ripple effects is for developing
+60
+M.W.E. WIGMAN
+
+interventions, policies, and strategies to address social issues and
+promote positive change at both individual and societal levels.
+Personal attitudes on societal norms and values are a
+significant aspect of the ripple effects on the influence of social
+behavior as they are shaped by individual experiences, beliefs,
+and values, which can collectively impact and transform broader
+societal norms over time.
+Attitude expression can influence others in one’s social
+circle, and as more adopt and express certain attitudes, a gradual
+shift of societal norms is felt. The instantiation of personal,
+abstract values through attitude concretizes the influential
+nature in shaping behavior.
+Often tied to social identities, individuals express attitudes
+aligned with their social groups to challenge or reinforce existing
+norms. This ripples to shift perceptions of what is considered
+normal or acceptable in society.
+Transmission
+of
+personal
+attitudes
+through
+social
+interactions, education, and media, potentially influence others,
+especially younger generations who are more susceptible. When
+enough individuals share similar attitudes, it can lead to
+collective action which then can influence institutional policies
+and practices further solidifying changes in societal norms.
+This is crucial when developing effective social and
+behavioral change interventions that aim to address harmful
+societal norms and promote positive collective behaviors. The
+rise to power of Adolf Hitler in Nazi Germany led to outbreak
+of World War II, resulting in devastating global conflict, the
+Holocaust, and a legacy of political and social trauma that not
+only destabilized Europe but shaped international relations for
+decades.
+THE NINE STITCHES
+61
+
+Post-war, the establishment of institutions like United
+Nations, NATO and the redefinition of human rights laws are
+clear examples of how one individual can function as a keystone
+with massive societal consequences.
+• Reference: Kershaw, I. (2000). Hitler: 1889-1936
+Hubris. W.W. Norton & Company. Agent
+To become a keystone agent in society, one must cultivate
+traits and behaviors that have a disproportionately large
+influence on collective outcomes. This involves the ability to
+catalyze behavioral changes through inspiration and motivation
+to adopt new perspectives, achievable in leadership and
+education, or by setting powerful examples.
+A key aspect is the facilitation of complex arrangements by
+helping to integrate and manage diverse groups and ideas,
+fostering cooperation and collective action. Much like keystone
+institutions in indigenous governance systems, these agents
+promote broad participation by encouraging wide engagement
+from various members of the society, ensuring that diverse voices
+are heard and represented. This complemented by behavioral
+persistence over time and the recognition of potentially different
+outcomes in various situations, helping to balance potential
+conflicts.
+Fostering interconnectedness between different parts of the
+social system and focusing on creating positive ripple effects is
+crucial once these qualities are successfully developed. The
+realization that the significant influence of collective behavior
+and social outcomes, while on the path of becoming a keystone
+agent, can be achieved during one’s presence, or long after their
+62
+M.W.E. WIGMAN
+
+absence is essential. There is also no certainty of the extent of
+impact, as even the noblest of intentions might breed the most
+disastrous of outcomes, and the reverse is equally true.
+When addressing challenges, the consideration of local
+innovations
+and
+global
+solutions
+represents
+two
+complementary approaches, each with its own strengths and
+limitations. Local innovations are tailored to specific regional
+contexts, offering several advantages. Beyond community
+empowerment, their cultural relevance aligns with local customs
+and preferences, allowing for a rapid response to immediate
+challenges. An example would be microfinance initiatives to
+empower local entrepreneurs.
+Global solutions aim to address challenges on a broader
+scale, offering benefits such as economies of scale, which can
+reduce implementation costs and increase efficiencies. Having a
+universal standard allows for resource pooling with established
+cross-regional consistency, leveraging knowledge and expertise
+from diverse sources. This is demonstrated by the United
+Nations’ Sustainable Development Goals.
+Notably, the synergy between the two approaches is the
+most effective strategy. An adaptive implementation of global
+solutions tailored to local contexts, and scaling local innovations
+to address similar challenges globally, creates a dynamic
+interplay. Knowledge sharing is intrinsic for improvement, with
+technology playing a vital role in bridging the gap through the
+rapid sharing of ideas and best practices on digital platforms.
+Using data analytics helps identify patterns and scale successful
+local solutions, which can be leveraged from emerging
+technologies.
+THE NINE STITCHES
+63
+
+Individual creativity plays a crucial role in addressing global
+challenges by generating innovative solutions and offering
+unique perspectives through cross-disciplinary thinking that
+challenges assumptions. By providing a platform for its
+expression, a powerful force can be harnessed to drive positive
+change.
+While demonstrating how individual actions can have
+far-reaching consequences on a global scale, three areas can be
+highlighted as deeply intertwined aspects of our globalized
+world:
+the
+interconnectedness
+of
+economic
+decisions,
+information sharing in the digital age, and personal health
+choices and public health.
+Economic Decisions:
+Personal
+spending
+habits
+and
+investment choices significantly influence global economic
+trends and financial systems. Shifts in consumer behavior affect
+local-global financial connections, with ripple effects influencing
+investment decisions and overall market trends.
+Digital Age: Individual voices are now amplified more
+powerfully in the digital age, shaping public opinions and global
+movements
+through
+social
+media
+and
+enabling
+rapid
+information dissemination. By enabling discussion participation,
+collective views on various issues are shaped, making collective
+action more sensitive to subtleties in global movements.
+Health Choices: Individual heath choices significantly
+affect community health and healthcare systems, especially in
+disease prevention through active measures and lifestyle choices.
+The social determinants of health can have broader health
+implications when they affect many people.
+The interrelation of these areas is evident in how they
+influence each other, underscoring the profound impact of
+64
+M.W.E. WIGMAN
+
+individual actions on global systems. Choices mad with specific
+personal goals in mind, can lead to unexpected, non-linear
+consequences on a global scale.
+Economic actions and market fluctuations as rhythmic
+cycles are often driven by the collective actions of individuals
+responding to changing circumstances. Individual biases and
+market imperfections can lead to economic downturns,
+contributing to dynamism and resilience by spurring innovation
+and adaptation, leading to new economic paradigms and
+opportunities.
+From a microcosm, personal health choices, economic
+decisions, and information sharing can offer the most impactful
+means of individual action, with the most ripple effects on the
+macrocosm of the rapidly changing world. This chapter serves as
+a bridge connecting our individual agency and systemic patterns
+to the broader context of global economic systems.
+The revelation of a fundamental duality seen as the tension
+between individual agency and collective impact will be
+explored further in the next part of this book. By examining
+this concept, we will understand how opposing forces in nature
+not only coexist but often create a harmonious balance that
+maintains and equilibrium and drives progress.
+THE NINE STITCHES
+65
+
+
+Don't miss out!
+Visit the website below and you can sign up to receive emails
+whenever M.W.E. Wigman publishes a new book. There's no
+charge and no obligation.
+https://books2read.com/r/B-A-JNLEF-ISZXI
+Connecting independent readers to independent writers.
+
+Also by M.W.E. Wigman
+Flowers from an Arabian Oasis
+The Nine Stitches
+
+
+
+

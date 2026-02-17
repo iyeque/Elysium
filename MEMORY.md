@@ -1,0 +1,4 @@
+- **Wilmax Contact Details:**
+  - **Name:** Wilmax
+  - **Phone:** +971 52 625 2152
+  - **Relationship:** Max's wife
