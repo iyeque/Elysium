@@ -21,6 +21,11 @@
       "installedAt": 1771336800000,
       "publishedAt": 1771336800000
     },
+    "iyeque-pdf-reader": {
+      "version": "1.1.0",
+      "installedAt": 1771336800000,
+      "publishedAt": 1771336800000
+    },
     "sonoscli": {
       "version": "1.0.0",
       "installedAt": 1770963916078,
@@ -29,10 +34,6 @@
     "tavily-search": {
       "version": "1.0.0",
       "installedAt": 1770965465982,
-      "note": "Update to 1.1.0 blocked - not owner"
-    },
-    "pdf-reader": {
-      "version": "1.0.0",
       "note": "Update to 1.1.0 blocked - not owner"
     }
   }

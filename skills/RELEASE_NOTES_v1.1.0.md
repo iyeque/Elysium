@@ -3,7 +3,7 @@
 **Date:** 2026-02-17  
 **Author:** iyeque  
 **Total Skills Updated:** 7 skills  
-**Successfully Published:** 4 skills (corrected slugs)  
+**Successfully Published:** 5 skills (corrected slugs)  
 
 ---
 
@@ -75,8 +75,8 @@
 
 ## SKILL.md Documentation Fixes
 
-### 5. pdf-reader (v1.1.0) ⚠️ NOT PUBLISHED
-**Reason:** Already owned by another user on ClawHub
+### 5. iyeque-pdf-reader (v1.1.0) ✅ PUBLISHED
+**Skill ID:** `k976rxbhsvpt9zcvw6dvaxx3an81adpm`
 
 **Documentation Fixed:**
 - ❌ **Mismatch:** SKILL.md described `pdfminer` and `PyPDF2` libraries
@@ -117,7 +117,7 @@
 | iyeque-device-control | 1.1.0 | ✅ Published | ✅ Command injection | ✅ |
 | iyeque-local-system-info | 1.1.0 | ✅ Published | - | ✅ |
 | iyeque-unified-web-search | 1.1.0 | ✅ Published | ✅ Query sanitization | ✅ |
-| pdf-reader | 1.1.0 | ⚠️ Blocked | - | ✅ |
+| iyeque-pdf-reader | 1.1.0 | ✅ Published | - | ✅ |
 | tavily-search | 1.1.0 | ⚠️ Blocked | - | ✅ |
 | sonoscli | 1.1.0 | ⚠️ Blocked | - | ✅ |
 
@@ -125,7 +125,7 @@
 
 ## Next Steps
 
-1. **For blocked skills** (pdf-reader, tavily-search, sonoscli):
+1. **For blocked skills** (tavily-search, sonoscli):
    - Contact current owners to transfer ownership OR
    - Create forked versions with different slugs
 
