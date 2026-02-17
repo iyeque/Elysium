@@ -27,41 +27,39 @@ const maxResults = parseInt(max_results) || 5;
 // SECURITY: Sanitize search query to prevent command injection
 function sanitizeQuery(q) {
   if (!q || typeof q !== 'string') throw new Error('Query is required');
-  const trimmed = q.trim();
+  let trimmed = q.trim();
   if (trimmed.length === 0) throw new Error('Query cannot be empty');
   if (trimmed.length > 500) throw new Error('Query too long (max 500 characters)');
+  
+  // SECURITY: Remove quotes (single/double) to prevent shell argument breakout
+  trimmed = trimmed.replace(/['"]/g, '');
+  
   // Block shell metacharacters
-  const dangerousChars = /[;&|`$(){}[\]<>\\!#*?~]/g;
+  const dangerousChars = /[;&|`$(){}[\]<>\!#*?~]/g;
   if (dangerousChars.test(trimmed)) {
     throw new Error('Query contains disallowed characters');
   }
   return trimmed;
 }
 
-// Call external skill/tool via OpenClaw's callSkill mechanism
-// In production, this would be replaced with actual API calls
 async function callSkill(skillName, action, params) {
   const sanitizedQuery = sanitizeQuery(params.q);
   
   if (skillName === 'tavily-search' && action === 'search') {
-    // Call tavily-search script directly
     const scriptPath = path.join(__dirname, '../tavily-search/scripts/search.mjs');
     const apiKey = process.env.TAVILY_API_KEY || '';
     
-    if (!apiKey) {
-      throw new Error('TAVILY_API_KEY not set');
-    }
+    if (!apiKey) throw new Error('TAVILY_API_KEY not set');
     
     try {
-      // Build command with proper escaping
+      // safeQuery has quotes stripped, so wrapping in "" is safe
       const cmd = `node "${scriptPath}" "${sanitizedQuery}" -n ${params.limit || 5}`;
       const output = execSync(cmd, {
         env: { ...process.env, TAVILY_API_KEY: apiKey },
         encoding: 'utf8',
-        stdio: ['pipe', 'pipe', 'pipe']
+        stdio: ['ignore', 'pipe', 'pipe'] // Ignore stdin
       });
       
-      // Parse the markdown output to extract results
       const results = [];
       const lines = output.split('\n');
       let currentResult = null;
@@ -84,48 +82,36 @@ async function callSkill(skillName, action, params) {
         }
       }
       if (currentResult) results.push(currentResult);
-      
       return { items: results.slice(0, params.limit || 5) };
     } catch (e) {
-      console.warn('Tavily search error:', e.message);
+      console.warn('Tavily search failed:', e.message);
       return { items: [] };
     }
   }
-  
-  if (skillName === 'web-search-plus' && action === 'search') {
-    // Placeholder for web-search-plus integration
-    // In production, this would call the actual API
-    console.warn('web-search-plus not configured');
-    return { items: [] };
-  }
-  
   return { items: [] };
 }
 
-// Simple local file search with proper sanitization
 function searchLocalFiles(query, maxResults) {
   const sanitizedQuery = sanitizeQuery(query);
   const results = [];
-  const workspaceDir = process.env.HOME ? path.join(process.env.HOME, '.openclaw', 'workspace') : './';
+  
+  // SECURITY: Enforce strict workspace root
+  const workspaceRoot = process.env.HOME ? path.resolve(process.env.HOME, '.openclaw', 'workspace') : path.resolve(process.cwd());
   
   try {
-    // SECURITY: Only search in allowed directories
-    const allowedDirs = ['memory', 'skills', '.'];
+    const allowedSubdirs = ['memory', 'skills']; // Do not include '.' to prevent scanning root if it has sensitive files
     
-    for (const dir of allowedDirs) {
-      const searchPath = path.join(workspaceDir, dir);
+    for (const subdir of allowedSubdirs) {
+      const searchPath = path.join(workspaceRoot, subdir);
       if (!fs.existsSync(searchPath)) continue;
       
+      // Additional safety check: ensure searchPath is actually inside workspaceRoot
+      if (!path.resolve(searchPath).startsWith(workspaceRoot)) continue;
+
       const files = fs.readdirSync(searchPath, { withFileTypes: true });
       for (const file of files) {
         if (file.isFile() && file.name.toLowerCase().includes(sanitizedQuery.toLowerCase())) {
           const fullPath = path.join(searchPath, file.name);
-          // SECURITY: Verify the path is still within workspace
-          const resolvedPath = path.resolve(fullPath);
-          if (!resolvedPath.startsWith(path.resolve(workspaceDir))) {
-            continue; // Path traversal attempt, skip
-          }
-          
           results.push({
             path: fullPath,
             snippet: `Found query "${sanitizedQuery}" in filename: ${file.name}`,
@@ -135,7 +121,7 @@ function searchLocalFiles(query, maxResults) {
       }
     }
   } catch (e) {
-    console.warn('Could not search local files:', e.message);
+    console.warn('Local search error:', e.message);
   }
   return results.slice(0, maxResults);
 }
@@ -146,7 +132,6 @@ async function doTool() {
     process.exit(1);
   }
 
-  // SECURITY: Validate query before processing
   let safeQuery;
   try {
     safeQuery = sanitizeQuery(query);
@@ -167,23 +152,7 @@ async function doTool() {
         score: i.score || 0.5,
         content: i.content 
       })));
-    } catch (e) {
-      console.warn('Tavily search failed:', e.message);
-    }
-  }
-
-  if (sourceList.includes('web-search-plus')) {
-    try {
-      const r = await callSkill('web-search-plus', 'search', { q: safeQuery, limit: maxResults });
-      results.push(...r.items.map(i => ({ 
-        source: 'web-search-plus', 
-        title: i.title, 
-        url: i.url, 
-        score: i.score || 0.5 
-      })));
-    } catch (e) {
-      console.warn('Web Search Plus failed:', e.message);
-    }
+    } catch (e) {}
   }
 
   if (sourceList.includes('local')) {
@@ -196,11 +165,8 @@ async function doTool() {
     })));
   }
 
-  // Sort by score and return top N
   results.sort((a, b) => (b.score || 0) - (a.score || 0));
-  const topResults = results.slice(0, maxResults);
-
-  console.log(JSON.stringify(topResults, null, 2));
+  console.log(JSON.stringify(results.slice(0, maxResults), null, 2));
 }
 
 doTool();

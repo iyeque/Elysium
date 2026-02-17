@@ -9,26 +9,26 @@ import re
 
 # SECURITY: Validate file paths to prevent path traversal
 def validate_file_path(file_path, must_exist=True):
-    """Validate file path for security"""
+    """Validate file path for security - must be within workspace"""
     if not file_path:
         return None
     
     # Resolve to absolute path
     abs_path = os.path.abspath(file_path)
+    workspace_root = os.path.abspath(os.getcwd())
     
-    # Check for path traversal attempts
-    if '..' in file_path:
-        # Allow .. only if it resolves to a safe location
-        pass  # We'll check after resolution
+    # SECURITY: Enforce workspace containment - file MUST be inside current working directory
+    if not abs_path.startswith(workspace_root + os.sep) and abs_path != workspace_root:
+        raise ValueError(f"Access denied: file must be within workspace ({workspace_root})")
     
-    if must_exist and not os.path.exists(abs_path):
-        raise FileNotFoundError(f"File not found: {abs_path}")
-    
-    # SECURITY: Ensure path doesn't escape workspace or common system dirs
-    forbidden_prefixes = ['/etc/', '/proc/', '/sys/', '/root/']
+    # SECURITY: Block sensitive system directories (defense in depth)
+    forbidden_prefixes = ['/etc/', '/proc/', '/sys/', '/root/', '/home/']
     for prefix in forbidden_prefixes:
         if abs_path.startswith(prefix):
             raise ValueError(f"Access denied: cannot access {prefix} directories")
+    
+    if must_exist and not os.path.exists(abs_path):
+        raise FileNotFoundError(f"File not found: {abs_path}")
     
     return abs_path
 

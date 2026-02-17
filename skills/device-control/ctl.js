@@ -1,8 +1,9 @@
-const { exec } = require('child_process');
+const { exec, execFile } = require('child_process');
 const os = require('os');
 const fs = require('fs');
 const { promisify } = require('util');
 const execPromise = promisify(exec);
+const execFilePromise = promisify(execFile);
 
 // Parse arguments manually
 const args = process.argv.slice(2);
@@ -22,7 +23,7 @@ let isWsl = false;
 let powershellPath = 'powershell.exe'; 
 let cmdPath = 'cmd.exe';
 let taskkillPath = 'taskkill.exe'; // Default
-let nircmdPath = 'nircmd.exe'; // Default
+let nircmdPath = 'nircmd.exe'; // Default - EXPECT IN PATH
 
 // Detect WSL
 if (platform === 'linux') {
@@ -31,17 +32,21 @@ if (platform === 'linux') {
         if (release.includes('microsoft') || release.includes('wsl')) {
             isWsl = true;
             platform = 'wsl'; 
-            // Use full paths for WSL
+            // Use full paths for WSL system binaries only
             powershellPath = '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe';
             cmdPath = '/mnt/c/Windows/System32/cmd.exe';
-            taskkillPath = '/mnt/c/Windows/System32/taskkill.exe'; // Full path for WSL
-            nircmdPath = '"/mnt/d/Program Files/nircmd/nircmd.exe"';
+            taskkillPath = '/mnt/c/Windows/System32/taskkill.exe';
+            // nircmdPath stays relative/in-path to avoid hardcoded hijackable paths
         }
     } catch (e) {}
 }
 
 // SECURITY: Validate and sanitize inputs
 function sanitizeNumber(val, min = 0, max = 100) {
+  // Strict regex check to prevent trailing junk like "50; rm -rf /"
+  if (!/^-?\d+$/.test(String(val))) {
+      throw new Error('Value must be a valid integer with no extra characters');
+  }
   const num = parseInt(val, 10);
   if (isNaN(num)) throw new Error('Value must be a number');
   if (num < min || num > max) throw new Error(`Value must be between ${min} and ${max}`);
@@ -50,13 +55,14 @@ function sanitizeNumber(val, min = 0, max = 100) {
 
 function sanitizeAppName(name) {
   if (!name || typeof name !== 'string') throw new Error('App name required');
-  // SECURITY: Only allow alphanumeric, spaces, dashes, underscores, and common path separators
-  // Block shell metacharacters that could enable command injection
   const sanitized = name.trim();
-  const dangerousChars = /[;&|`$(){}[\]<>\\!#*?~]/;
-  if (dangerousChars.test(sanitized)) {
-    throw new Error('Invalid app name: contains disallowed characters');
+  
+  // SECURITY: Strict Allowlist - Only Alphanumeric, spaces, dashes, underscores, dots
+  // Reject everything else.
+  if (!/^[a-zA-Z0-9 _\-\.]+$/.test(sanitized)) {
+    throw new Error('Invalid app name: only alphanumeric, spaces, dots, dashes, and underscores allowed');
   }
+  
   // Limit length to prevent buffer issues
   if (sanitized.length > 256) {
     throw new Error('App name too long (max 256 characters)');
@@ -71,7 +77,6 @@ async function doTool() {
   }
 
   console.log('[Device Control] Platform: ' + platform + ' (WSL: ' + isWsl + ')');
-  console.log('[Device Control] Using PowerShell: ' + powershellPath);
 
   try {
     switch (action) {
@@ -111,44 +116,49 @@ async function setVolume(val) {
   
   if (platform === 'linux') {
     try {
-      // SECURITY: Use shell: false and pass arguments as array where possible
-      // pactl accepts percentage directly
-      await execPromise(`pactl set-sink-volume @DEFAULT_SINK@ ${v}%`, { shell: '/bin/bash' });
+      // SECURITY: Use execFile where possible to avoid shell interpolation
+      await execFilePromise('pactl', ['set-sink-volume', '@DEFAULT_SINK@', `${v}%`]);
     } catch (e) {
-      await execPromise(`amixer sset Master ${v}%`, { shell: '/bin/bash' });
+      await execFilePromise('amixer', ['sset', 'Master', `${v}%`]);
     }
   } else if (platform === 'darwin') {
-    // SECURITY: osascript with escaped value
-    const escapedVal = String(v).replace(/[^0-9]/g, '');
-    await execPromise(`osascript -e "set volume output volume ${escapedVal}"`);
+    // osascript requires shell, but v is strictly validated number
+    await execPromise(`osascript -e "set volume output volume ${v}"`);
   } else if (platform === 'win32' || platform === 'wsl') {
-    // Use nircmd.exe for precise volume control - QUOTED path
     // 65535 is 100% volume
     const nircmdVal = Math.floor(65535 * (v / 100));
-    const cmd = nircmdPath + ' setsysvolume ' + nircmdVal; // nircmdPath is already quoted
-    console.log('Running volume command: ' + cmd);
-    await execPromise(cmd);
+    // Verify nircmd exists in path or current dir, don't use absolute hardcoded path
+    if (isWsl) {
+        // For WSL, we have to run windows binary.
+        // We use execFile on the windows binary if possible, but crossing WSL boundary usually needs shell wrapper
+        // Since nircmdVal is strictly validated integer, injection risk is low here.
+        await execPromise(`${nircmdPath} setsysvolume ${nircmdVal}`);
+    } else {
+        await execPromise(`${nircmdPath} setsysvolume ${nircmdVal}`);
+    }
   }
 }
 
 async function changeVolume(delta) {
   const d = sanitizeNumber(delta, -100, 100);
-  // Get current volume first (platform-specific)
   let currentVolume = 50; // default fallback
   
   if (platform === 'linux') {
     try {
-      const result = await execPromise('pactl get-sink-volume @DEFAULT_SINK@ | grep -oP "\\d+%" | head -1');
-      currentVolume = parseInt(result.stdout, 10) || 50;
+      const result = await execPromise('pactl get-sink-volume @DEFAULT_SINK@');
+      // Parse output safely
+      const match = result.stdout.match(/(\d+)%/);
+      if (match) currentVolume = parseInt(match[1], 10);
     } catch (e) {
       try {
-        const result = await execPromise('amixer get Master | grep -oP "\\d+%" | head -1');
-        currentVolume = parseInt(result.stdout, 10) || 50;
+        const result = await execPromise('amixer get Master');
+        const match = result.stdout.match(/(\d+)%/);
+        if (match) currentVolume = parseInt(match[1], 10);
       } catch (e2) {}
     }
   } else if (platform === 'darwin') {
     const result = await execPromise('osascript -e "output volume of (get volume settings)"');
-    currentVolume = parseInt(result.stdout, 10) || 50;
+    currentVolume = parseInt(result.stdout.trim(), 10) || 50;
   }
   
   const newVolume = Math.max(0, Math.min(100, currentVolume + d));
@@ -160,30 +170,24 @@ async function setBrightness(val) {
   const v = sanitizeNumber(val, 0, 100);
   
   if (platform === 'linux' && !isWsl) {
-    // Try common brightness control methods
     try {
-      // Method 1: brightnessctl (most common on modern Linux)
-      await execPromise(`brightnessctl set ${v}%`, { shell: '/bin/bash' });
+      await execFilePromise('brightnessctl', ['set', `${v}%`]);
     } catch (e) {
-      try {
-        // Method 2: Direct sysfs access (requires root usually)
-        const maxBright = fs.readFileSync('/sys/class/backlight/intel_backlight/max_brightness', 'utf8').trim();
-        const target = Math.floor((parseInt(maxBright, 10) * v) / 100);
-        fs.writeFileSync('/sys/class/backlight/intel_backlight/brightness', target.toString());
-      } catch (e2) {
-        throw new Error('Cannot control brightness: try brightnessctl or run as root');
-      }
+        // Fallback or error
+        throw new Error('Cannot control brightness: install brightnessctl');
     }
   } else if (platform === 'darwin') {
-    throw new Error("macOS brightness requires 'brightness' CLI tool. Install with: brew install brightness");
+    throw new Error("macOS brightness requires 'brightness' CLI tool.");
   } else if (platform === 'win32' || platform === 'wsl') {
     // WmiMonitorBrightnessMethods via PowerShell
     // 1 is the timeout in seconds
+    // Since v is strict number, injection is mitigated
     const psCmd = `(Get-WmiObject -Namespace root/WMI -Class WmiMonitorBrightnessMethods).WmiSetBrightness(1, ${v})`;
-    const cmd = powershellPath + ' -Command "' + psCmd + '"';
-    
-    console.log('Running: ' + cmd);
-    await execPromise(cmd);
+    if (isWsl) {
+        await execFilePromise(powershellPath, ['-Command', psCmd]);
+    } else {
+        await execPromise(`powershell -Command "${psCmd}"`);
+    }
   }
 }
 
@@ -191,20 +195,19 @@ async function openApp(appName) {
   const sanitizedApp = sanitizeAppName(appName);
   
   if (platform === 'linux') {
-    // SECURITY: Use exec with shell: false for safer execution
-    // Try to find the app in PATH first
-    const subprocess = exec(sanitizedApp, { detached: true, stdio: 'ignore', shell: false });
+    // SECURITY: Use exec with shell: false is ideal, but for opening apps we often need detached
+    // We use the sanitized name directly.
+    const subprocess = exec(`"${sanitizedApp}"`, { detached: true, stdio: 'ignore' });
     subprocess.unref();
   } else if (platform === 'darwin') {
-    // SECURITY: Escape the app name for osascript
-    const escapedApp = sanitizedApp.replace(/"/g, '\\"');
-    await execPromise(`open -a "${escapedApp}"`);
+    // Escape double quotes just in case, though allowlist blocks them
+    const safeName = sanitizedApp.replace(/"/g, '\\"');
+    await execPromise(`open -a "${safeName}"`);
   } else if (platform === 'win32') {
-    // SECURITY: Use start with quoted app name
     await execPromise(`start "" "${sanitizedApp}"`, { shell: 'cmd.exe' });
   } else if (platform === 'wsl') {
-      // Use cmd.exe /c start to launch Windows apps from WSL - QUOTED
-      await execPromise(`${cmdPath} /c start "" "${sanitizedApp}"`);
+      // Use cmd.exe /c start to launch Windows apps from WSL
+      await execFilePromise(cmdPath, ['/c', 'start', '', sanitizedApp]);
   }
 }
 
@@ -212,14 +215,12 @@ async function closeApp(appName) {
   const sanitizedApp = sanitizeAppName(appName);
   
   if (platform === 'linux' || platform === 'darwin') {
-    // SECURITY: pkill with -f and quoted pattern
-    await execPromise(`pkill -f "${sanitizedApp}"`, { shell: '/bin/bash' });
+    // pkill -f pattern
+    await execFilePromise('/usr/bin/pkill', ['-f', sanitizedApp]);
   } else if (platform === 'win32') {
-    // SECURITY: taskkill with IM and quoted name
-    await execPromise(`taskkill /IM "${sanitizedApp}.exe" /F`, { shell: 'cmd.exe' });
+    await execPromise(`taskkill /IM "${sanitizedApp}.exe" /F`);
   } else if (platform === 'wsl') {
-      // Use full path for taskkill.exe in WSL
-      await execPromise(`${taskkillPath} /F /IM "${sanitizedApp}.exe"`); 
+      await execFilePromise(taskkillPath, ['/F', '/IM', `${sanitizedApp}.exe`]); 
   }
 }
 

@@ -1,9 +1,9 @@
-# Skills v1.1.0 Release Notes
+# Skills v1.1.0 + v1.1.1 Release Notes
 
 **Date:** 2026-02-17  
 **Author:** iyeque  
 **Total Skills Updated:** 7 skills  
-**Successfully Published:** 5 skills (corrected slugs)  
+**Successfully Published:** 8 releases (5 @ v1.1.0, 3 @ v1.1.1 security patches)  
 
 ---
 
@@ -109,14 +109,24 @@
 
 ---
 
-## Summary
+## v1.1.1 Security Patches (Audit Remediation)
+
+Following a security audit, three skills received critical patches:
+
+| Skill | Version | Skill ID | Fix Applied |
+|-------|---------|----------|-------------|
+| iyeque-device-control | 1.1.1 | `k9783n8qhr9ngphpyn6japqy1n81a3tj` | Removed hardcoded WSL path, strict allowlist for app names |
+| iyeque-unified-web-search | 1.1.1 | `k9725281ze3zp6z9dd331fkdk981a851` | Block quotes in queries, strict workspace root |
+| iyeque-audio-processing | 1.1.1 | `k972evfkmw94z68fbjsm9yc8xx81ahsm` | Enforce workspace containment for file paths |
+
+## Summary (v1.1.0)
 
 | Skill | Version | Status | Security Fixes | Docs Fixed |
 |-------|---------|--------|----------------|------------|
-| iyeque-audio-processing | 1.1.0 | ✅ Published | ✅ Path validation | ✅ |
-| iyeque-device-control | 1.1.0 | ✅ Published | ✅ Command injection | ✅ |
+| iyeque-audio-processing | 1.1.0→1.1.1 | ✅ Published | ✅ Path validation + containment | ✅ |
+| iyeque-device-control | 1.1.0→1.1.1 | ✅ Published | ✅ Command injection + allowlist | ✅ |
 | iyeque-local-system-info | 1.1.0 | ✅ Published | - | ✅ |
-| iyeque-unified-web-search | 1.1.0 | ✅ Published | ✅ Query sanitization | ✅ |
+| iyeque-unified-web-search | 1.1.0→1.1.1 | ✅ Published | ✅ Query sanitization + workspace | ✅ |
 | iyeque-pdf-reader | 1.1.0 | ✅ Published | - | ✅ |
 | tavily-search | 1.1.0 | ⚠️ Blocked | - | ✅ |
 | sonoscli | 1.1.0 | ⚠️ Blocked | - | ✅ |
