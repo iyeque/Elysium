@@ -32,8 +32,8 @@ contract DeployAll is Script {
     function run() public {
         vm.startBroadcast();
 
-        // 1. Deploy ELYS token
-        elys = new ELYS();
+        // 1. Deploy ELYS token (rewardsPool will be set after Staking deployment)
+        elys = new ELYS(address(0));
         console.log("ELYS deployed at:", address(elys));
 
         // 2. Deploy Timelock
@@ -151,6 +151,14 @@ contract DeployAll is Script {
 
         // Grant JURY_ROLE on CitizenshipNFT to CitizenshipJury
         citizenshipNFT.grantRole(keccak256("JURY_ROLE"), address(citizenshipJury));
+
+        // ELYS: Set rewards pool to Staking (transaction fee burn -> staking rewards)
+        elys.setRewardsPool(address(staking));
+        console.log("ELYS rewards pool set to Staking");
+
+        // Staking: Grant REWARDER_ROLE to Treasury for manual top-ups if needed
+        staking.grantRole(keccak256("REWARDER_ROLE"), address(treasury));
+        console.log("Granted Staking REWARDER_ROLE to Treasury");
 
         vm.stopBroadcast();
 

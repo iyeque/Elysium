@@ -17,7 +17,7 @@
        address user = address(0x2);
 
        function setUp() public {
-           elys = new ELYS();
+           elys = new ELYS(address(0));
            operatorRegistry = new OperatorRegistry(address(0));
            citizenshipNFT = new CitizenshipNFT(address(operatorRegistry));
            staking = new Staking(address(elys), address(citizenshipNFT));

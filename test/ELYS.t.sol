@@ -11,7 +11,7 @@
        address user2 = address(0x3);
 
        function setUp() public {
-           elys = new ELYS();
+           elys = new ELYS(address(0));
            // Deployer (this) has all tokens; transfer some to owner
            uint256 initial = 1_000_000 * 10**18;
            vm.prank(address(this));
