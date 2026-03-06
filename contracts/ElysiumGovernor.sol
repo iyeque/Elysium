@@ -85,6 +85,15 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
         require(citizen.tier >= 1, "Governor: Resident tier required"); // tier 1=Resident
         
+        // Phase-based proposal restrictions (Constitution Article II.5 & IV.3)
+        // Only H1 humans (phase == 1) may propose Constitutional amendments or Core Principle changes
+        if (proposalType == ProposalType.Constitutional || proposalType == ProposalType.CorePrinciple) {
+            require(!citizen.isAI, "Governor: AI cannot propose constitutional/core changes");
+            require(citizen.phase == 1, "Governor: only H1 humans may propose this");
+        }
+        
+        // AI phase check: AI may only propose in Phase 3? Actually Constitution says AI advisory only in Phase 1; Phase 2 they can propose? It says Phase 2: 0.5x vote weight on technical matters only; doesn't mention proposing. Likely AI can propose in Phase 2+? For now, allow any phase >=2? Simpler: allow AI to propose any, but voting weight will be limited.
+        
         // Determine tier from proposal type
         Tier tier = _getTierFromType(proposalType);
         
@@ -134,6 +143,10 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
     /**
      * @dev Voting power: 1 vote per eligible citizen (Resident+ tier)
      * Uses 1e18 precision for compatibility with OpenZeppelin
+     * 
+     * Phase interpretation:
+     * - Humans: phase 1=H1, 2=H2, 3=H3 (H3 may have voting delay - NOT ENFORCED YET)
+     * - AI: phase 1=Phase1 (advisory, no vote), phase 2=Phase2 (0.5x on technical), phase 3=Phase3 (full)
      */
     function _getVotes(
         address account,
@@ -154,19 +167,23 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         
         // AI voting rights per phase (Constitution Article IX)
         if (citizen.isAI) {
-            if (citizen.phase == 0) {
+            if (citizen.phase == 1) {
                 // Phase 1: Advisory only, no voting
                 return 0;
-            } else if (citizen.phase == 1) {
-                // Phase 2: 0.5x weight (simplified - full implementation would check proposal type)
+            } else if (citizen.phase == 2) {
+                // Phase 2: 0.5x weight (simplified - should be restricted to technical proposals only)
                 return (1 ether * 5000) / 10000; // 0.5x
-            } else {
+            } else if (citizen.phase >= 3) {
                 // Phase 3: Full equality
                 return 1 ether;
+            } else {
+                return 0;
             }
         }
         
-        // Human citizens: 1 vote each
+        // Human citizens: 1 vote each (phase 1,2,3 all get 1 vote)
+        // TODO: Enforce 6-month waiting period for H3 (phase 3) per Constitution II.5
+        // Requires cross-block timestamp which is not available in _getVotes; alternative: flag after 6 months
         return 1 ether;
     }
     
@@ -209,6 +226,46 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
      */
     function CLOCK_MODE() public pure override returns (string memory) {
         return "mode=blocknumber&from=default";
+    }
+    
+    /**
+     * @dev Determine if a proposal succeeds based on votes and proposal type
+     * Thresholds (basis points of total votes cast):
+     * - Simple/Parameter: >50% (simple majority)
+     * - TreasurySpendSmall (<10k): 51% majority
+     * - TreasurySpendMedium (10k-1M): 60% majority
+     * - TreasurySpendLarge (>1M): 67% majority
+     * - Constitutional: 67% majority
+     * - CorePrinciple: 80% majority
+     * - AIPhaseTransition: 67% majority
+     * - MultiSigElection: 51% majority
+     * Note: Quorum is checked separately via _quorumReached.
+     */
+    function _voteSucceeded(uint256 proposalId) internal view override(Governor, GovernorCountingSimple) returns (bool) {
+        ProposalType proposalType = proposalTypes[proposalId];
+        (uint256 againstVotes, uint256 forVotes, ) = proposalVotes(proposalId);
+        uint256 totalVotes = forVotes + againstVotes;
+        if (totalVotes == 0) {
+            return false;
+        }
+        
+        uint256 numerator = forVotes * 10000;
+        uint256 requiredPercentage;
+        
+        if (proposalType == ProposalType.CorePrinciple) {
+            requiredPercentage = 8000; // 80%
+        } else if (proposalType == ProposalType.Constitutional || 
+                   proposalType == ProposalType.TreasurySpendLarge ||
+                   proposalType == ProposalType.AIPhaseTransition) {
+            requiredPercentage = 6700; // 67%
+        } else if (proposalType == ProposalType.TreasurySpendMedium) {
+            requiredPercentage = 6000; // 60%
+        } else {
+            // Simple majority: >50%
+            return forVotes > againstVotes;
+        }
+        
+        return numerator >= totalVotes * requiredPercentage;
     }
     
     // Required overrides for GovernorTimelockControl

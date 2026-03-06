@@ -14,6 +14,7 @@
 
    contract CitizenshipNFT is ERC721, ERC721Enumerable, IERC5484, AccessControl {
        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+       bytes32 public constant VERIFIER_ROLE = keccak256("VERIFIER_ROLE");
 
        struct Citizen {
            uint256 citizenId;
@@ -38,6 +39,7 @@
        constructor(address _operatorRegistry) ERC721("Elysium Citizenship", "ELYS-C") {
            _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
            _grantRole(MINTER_ROLE, msg.sender);
+           _grantRole(VERIFIER_ROLE, msg.sender); // Deployer can verify human phases
            operatorRegistry = _operatorRegistry;
        }
 
@@ -77,7 +79,7 @@
                citizenId: tokenId,
                wallet: wallet,
                tier: 0,
-               phase: 0,
+               phase: 1, // AI Phase 1: Advisory (no voting)
                createdAt: block.timestamp,
                isAI: true,
                metadataURI: metadataURI
@@ -101,9 +103,9 @@
            citizens[tokenId].tier = newTier;
        }
 
-       function updatePhase(uint256 tokenId, uint256 newPhase) external onlyRole(DEFAULT_ADMIN_ROLE) {
+       function updatePhase(uint256 tokenId, uint256 newPhase) external onlyRole(VERIFIER_ROLE) {
            require(_ownerOf(tokenId) != address(0), "Citizenship: token does not exist");
-           require(newPhase <= 3, "Citizenship: invalid phase");
+           require(newPhase >= 1 && newPhase <= 3, "Citizenship: invalid phase");
            citizens[tokenId].phase = newPhase;
        }
 

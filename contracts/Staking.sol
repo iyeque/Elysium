@@ -112,7 +112,7 @@
            uint256 firstStakeId = nextStakeId[user] - 1;
            citizenshipStakeId[user] = firstStakeId;
            uint256 tier = _calculateTier(totalStaked[user]);
-           uint256 phase = 0; // Default unverified; update after verification (H1/H2/H3)
+           uint256 phase = 3; // H3 - Stake-based residency (per Constitution Article II.5)
            uint256 tokenId = citizenshipNft.mintHuman(user, tier, phase, "");
            emit CitizenshipMinted(user, tokenId, firstStakeId);
        }
