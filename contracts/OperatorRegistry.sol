@@ -21,21 +21,21 @@
 
        event AIAttested(address indexed aiWallet, address indexed operator, uint256 nonce);
        event AIRevoked(address indexed aiWallet, address indexed operator);
-       event CitizenshipNFTUpdated(address _citizenshipNFT);
+       event CitizenshipNFTUpdated(address _citizenshipNft);
 
-       constructor(address _citizenshipNFT) {
+       constructor(address _citizenshipNft) {
            _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
            _grantRole(OPERATOR_ROLE, msg.sender);
            _grantRole(ATTESTER_ROLE, msg.sender);
-           citizenshipNFT = _citizenshipNFT;
+           citizenshipNFT = _citizenshipNft;
        }
 
-       function setCitizenshipNFT(address _citizenshipNFT) external onlyRole(DEFAULT_ADMIN_ROLE) {
-           citizenshipNFT = _citizenshipNFT;
-           emit CitizenshipNFTUpdated(_citizenshipNFT);
+       function setCitizenshipNft(address _citizenshipNft) external onlyRole(DEFAULT_ADMIN_ROLE) {
+           citizenshipNFT = _citizenshipNft;
+           emit CitizenshipNFTUpdated(_citizenshipNft);
        }
 
-       function attestAI(address aiWallet) external onlyRole(OPERATOR_ROLE) {
+       function attestAi(address aiWallet) external onlyRole(OPERATOR_ROLE) {
            require(aiWallet != msg.sender, "Operator: self-attestation not allowed");
            require(aiWallet != address(0), "Operator: zero address");
            address existingOperator = aiAttestations[aiWallet].operator;
@@ -52,7 +52,7 @@
            emit AIAttested(aiWallet, msg.sender, operatorNonces[msg.sender][aiWallet] + 1);
        }
 
-       function revokeAI(address aiWallet) external onlyRole(OPERATOR_ROLE) {
+       function revokeAi(address aiWallet) external onlyRole(OPERATOR_ROLE) {
            Attestation storage att = aiAttestations[aiWallet];
            require(att.operator == msg.sender, "Operator: not your attestation");
            operatorAICount[msg.sender] -= 1;

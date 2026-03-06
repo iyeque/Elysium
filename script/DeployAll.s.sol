@@ -49,7 +49,7 @@ contract DeployAll is Script {
         console.log("CitizenshipNFT deployed at:", address(citizenshipNFT));
 
         // 5. Update OperatorRegistry with CitizenshipNFT address
-        operatorRegistry.setCitizenshipNFT(address(citizenshipNFT));
+        operatorRegistry.setCitizenshipNft(address(citizenshipNFT));
 
         // 6. Define multisig signers (must be eligible humans with appropriate phase/tier)
         // Upgrade: 3/5, H1 only
