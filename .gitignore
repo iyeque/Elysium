@@ -1,0 +1,14 @@
+.idea
+.vscode
+.DS_Store
+out
+cache
+artifacts
+coverage.txt
+coverage
+lib/<other libs>
+.env
+secrets.json
+private-key*
+broadcast/
+dry-run/
