@@ -2,6 +2,7 @@
    pragma solidity ^0.8.20;
 
    import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+   import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
    import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
    import "@openzeppelin/contracts/access/AccessControl.sol";
    import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
@@ -11,7 +12,7 @@
        function verifyAttestation(address aiWallet, address operator) external view returns (bool valid, uint256 count);
    }
 
-   contract CitizenshipNFT is ERC721, IERC5484, AccessControl {
+   contract CitizenshipNFT is ERC721, ERC721Enumerable, IERC5484, AccessControl {
        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
        struct Citizen {
@@ -95,6 +96,17 @@
            emit CitizenshipRevoked(owner, tokenId);
        }
 
+       function updateTier(uint256 tokenId, uint256 newTier) external onlyRole(DEFAULT_ADMIN_ROLE) {
+           require(_ownerOf(tokenId) != address(0), "Citizenship: token does not exist");
+           citizens[tokenId].tier = newTier;
+       }
+
+       function updatePhase(uint256 tokenId, uint256 newPhase) external onlyRole(DEFAULT_ADMIN_ROLE) {
+           require(_ownerOf(tokenId) != address(0), "Citizenship: token does not exist");
+           require(newPhase <= 3, "Citizenship: invalid phase");
+           citizens[tokenId].phase = newPhase;
+       }
+
        function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
            require(_ownerOf(tokenId) != address(0), "ERC721Metadata: URI query for nonexistent token");
            return citizens[tokenId].metadataURI;
@@ -115,14 +127,22 @@
            return walletToTokenId[wallet];
        }
 
-       function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, AccessControl, IERC165) returns (bool) {
-           return interfaceId == type(IERC165).interfaceId || interfaceId == type(IERC5484).interfaceId || super.supportsInterface(interfaceId);
+       function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC721Enumerable, AccessControl, IERC165) returns (bool) {
+           return interfaceId == type(IERC165).interfaceId || 
+                  interfaceId == type(IERC5484).interfaceId || 
+                  interfaceId == type(ERC721Enumerable).interfaceId ||
+                  super.supportsInterface(interfaceId);
        }
 
        // Soulbound: mint and burn allowed; other transfers blocked
-       function _update(address to, uint256 tokenId, address auth) internal virtual override returns (address) {
+       function _update(address to, uint256 tokenId, address auth) internal virtual override(ERC721, ERC721Enumerable) returns (address) {
            address from = _ownerOf(tokenId);
            require(from == address(0) || to == address(0), "ERC5484: cannot transfer soulbound token");
            return super._update(to, tokenId, auth);
+       }
+       
+       // Required for ERC721Enumerable compatibility
+       function _increaseBalance(address account, uint128 value) internal virtual override(ERC721, ERC721Enumerable) {
+           super._increaseBalance(account, value);
        }
    }

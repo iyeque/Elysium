@@ -16,7 +16,7 @@
        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
        ELYS public token;
-       CitizenshipNFT public citizenshipNFT;
+       CitizenshipNFT public citizenshipNft;
 
        uint256 public constant STAKE_LOCK_DURATION = 30 days;
        uint256 public constant UNSTAKE_DELAY = 30 days;
@@ -40,9 +40,9 @@
        event Withdrawn(address indexed user, uint256 stakeId, uint256 amount);
        event CitizenshipMinted(address indexed user, uint256 tokenId, uint256 stakeId);
 
-       constructor(address _token, address _citizenshipNFT) {
+       constructor(address _token, address _citizenshipNft) {
            token = ELYS(_token);
-           citizenshipNFT = CitizenshipNFT(_citizenshipNFT);
+           citizenshipNft = CitizenshipNFT(_citizenshipNft);
            _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
            _grantRole(PAUSER_ROLE, msg.sender);
            _grantRole(MINTER_ROLE, msg.sender);
@@ -111,7 +111,23 @@
        function _mintCitizenship(address user) internal {
            uint256 firstStakeId = nextStakeId[user] - 1;
            citizenshipStakeId[user] = firstStakeId;
-           uint256 tokenId = citizenshipNFT.mintHuman(user, 4, 2, "");
+           uint256 tier = _calculateTier(totalStaked[user]);
+           uint256 phase = 0; // Default unverified; update after verification (H1/H2/H3)
+           uint256 tokenId = citizenshipNft.mintHuman(user, tier, phase, "");
            emit CitizenshipMinted(user, tokenId, firstStakeId);
+       }
+
+       function _calculateTier(uint256 stakeAmount) internal pure returns (uint256) {
+           if (stakeAmount >= 100_000 * 1e18) return 3; // Founder
+           if (stakeAmount >= 10_000 * 1e18) return 2;  // Citizen
+           if (stakeAmount >= 1_000 * 1e18) return 1;   // Resident
+           return 0; // Observer (no governance rights)
+       }
+
+       function updateTier(address user) external {
+           uint256 tokenId = citizenshipNft.citizenTokenId(user);
+           require(tokenId > 0, "Staking: no citizenship");
+           uint256 newTier = _calculateTier(totalStaked[user]);
+           citizenshipNft.updateTier(tokenId, newTier);
        }
    }

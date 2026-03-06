@@ -25,11 +25,11 @@ contract DeployAll is Script {
 
     // Initial signers for treasury (will be replaced by governance later)
     address[] public initialSigners = [
-        address(0xE6b935031c7bAd3A2E4bC0b15Af4c57963719Cbe),
-        address(0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE),
-        address(0xE3cC7740a4a9bFe5cD78F7D9532d23B51F9A5b74),
-        address(0x3d45B09eD77a4525822A8Dc379D26bD799957c43),
-        address(0x698171228d3aB667fd3b5b18b08eBf8cBF9cF3bF)
+        0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE,
+        0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE,
+        0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74,
+        0x3D45B09ED77A4525822a8dC379d26Bd799957c43,
+        0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF
     ];
 
     function setUp() public {}
@@ -42,7 +42,7 @@ contract DeployAll is Script {
         console.log("ELYS deployed at:", address(elys));
 
         // 2. Deploy Timelock (with empty proposers/executors, will grant later)
-        timelock = new ElysiumTimelock(MIN_DELAY, new address[](0), new address[](0));
+        timelock = new ElysiumTimelock(MIN_DELAY, new address[](0), new address[](0), msg.sender);
         console.log("Timelock deployed at:", address(timelock));
 
         // 3. Deploy OperatorRegistry
@@ -66,11 +66,9 @@ contract DeployAll is Script {
 
         // 8. Deploy Governor
         governor = new ElysiumGovernor(
-            address(elys),
-            address(timelock),
-            1 days,   // votingDelay
-            7 days,   // votingPeriod
-            100 * 10**18 // proposalThreshold: 100 ELYS
+            citizenshipNFT,
+            timelock,
+            "Elysium Governor"
         );
         console.log("Governor deployed at:", address(governor));
 
