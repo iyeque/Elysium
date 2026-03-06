@@ -165,6 +165,11 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
             return 0;
         }
         
+        // H3 6-month voting delay: Human phase 3 must have held citizenship for at least 6 months (183 days)
+        if (!citizen.isAI && citizen.phase == 3 && block.timestamp < citizen.createdAt + 183 days) {
+            return 0;
+        }
+
         // AI voting rights per phase (Constitution Article IX)
         if (citizen.isAI) {
             if (citizen.phase == 1) {
@@ -181,9 +186,7 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
             }
         }
         
-        // Human citizens: 1 vote each (phase 1,2,3 all get 1 vote)
-        // TODO: Enforce 6-month waiting period for H3 (phase 3) per Constitution II.5
-        // Requires cross-block timestamp which is not available in _getVotes; alternative: flag after 6 months
+        // Human citizens (H1, H2, and H3 with >=6 months tenure): 1 vote each
         return 1 ether;
     }
     
