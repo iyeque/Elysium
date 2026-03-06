@@ -1,1 +1,0 @@
-This skill provides a command-line interface to the Tavily API.

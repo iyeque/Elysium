@@ -7,30 +7,25 @@ import { ElysiumTimelock } from "../contracts/ElysiumTimelock.sol";
 import { ElysiumGovernor } from "../contracts/ElysiumGovernor.sol";
 import { OperatorRegistry } from "../contracts/OperatorRegistry.sol";
 import { CitizenshipNFT } from "../contracts/CitizenshipNFT.sol";
-import { ElysiumTreasury } from "../contracts/ElysiumTreasury.sol";
+import { ElysiumTreasuryMultiSig } from "../contracts/ElysiumTreasuryMultiSig.sol";
 import { Staking } from "../contracts/Staking.sol";
+import { ElysiumPauseMultiSig } from "../contracts/ElysiumPauseMultiSig.sol";
+import { ElysiumUpgradeMultiSig } from "../contracts/ElysiumUpgradeMultiSig.sol";
+import { CitizenshipJury } from "../contracts/CitizenshipJury.sol";
 
 contract DeployAll is Script {
     uint256 internal constant MIN_DELAY = 2 days;
-    address[] internal proposers;
-    address[] internal executors;
 
     ELYS elys;
     ElysiumTimelock timelock;
     ElysiumGovernor governor;
     OperatorRegistry operatorRegistry;
     CitizenshipNFT citizenshipNFT;
-    ElysiumTreasury treasury;
+    ElysiumTreasuryMultiSig treasury;
     Staking staking;
-
-    // Initial signers for treasury (will be replaced by governance later)
-    address[] public initialSigners = [
-        0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE,
-        0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE,
-        0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74,
-        0x3D45B09ED77A4525822a8dC379d26Bd799957c43,
-        0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF
-    ];
+    ElysiumPauseMultiSig pauseMultiSig;
+    ElysiumUpgradeMultiSig upgradeMultiSig;
+    CitizenshipJury citizenshipJury;
 
     function setUp() public {}
 
@@ -41,12 +36,12 @@ contract DeployAll is Script {
         elys = new ELYS();
         console.log("ELYS deployed at:", address(elys));
 
-        // 2. Deploy Timelock (with empty proposers/executors, will grant later)
-        timelock = new ElysiumTimelock(MIN_DELAY, new address[](0), new address[](0), msg.sender);
+        // 2. Deploy Timelock
+        timelock = new ElysiumTimelock(2 days, new address[](0), new address[](0), msg.sender);
         console.log("Timelock deployed at:", address(timelock));
 
         // 3. Deploy OperatorRegistry
-        operatorRegistry = new OperatorRegistry(address(0)); // placeholder
+        operatorRegistry = new OperatorRegistry(address(0));
         console.log("OperatorRegistry deployed at:", address(operatorRegistry));
 
         // 4. Deploy CitizenshipNFT
@@ -56,15 +51,70 @@ contract DeployAll is Script {
         // 5. Update OperatorRegistry with CitizenshipNFT address
         operatorRegistry.setCitizenshipNFT(address(citizenshipNFT));
 
-        // 6. Deploy Staking
+        // 6. Define multisig signers (must be eligible humans with appropriate phase/tier)
+        // Upgrade: 3/5, H1 only
+        address[] memory upgradeSigners = new address[](5);
+        upgradeSigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
+        upgradeSigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
+        upgradeSigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
+        upgradeSigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
+        upgradeSigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+
+        // Pause: 2/3, H1 or H2
+        address[] memory pauseSigners = new address[](3);
+        pauseSigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
+        pauseSigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
+        pauseSigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
+
+        // Treasury: 3/5, H1 or H2
+        address[] memory treasurySigners = new address[](5);
+        treasurySigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
+        treasurySigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
+        treasurySigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
+        treasurySigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
+        treasurySigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+
+        // Jury: 3/5, H1 or H2, Citizen tier (>=2)
+        address[] memory jurySigners = new address[](5);
+        jurySigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
+        jurySigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
+        jurySigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
+        jurySigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
+        jurySigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+
+        // 7. Mint NFTs for initial multisig signers with appropriate phase/tier
+        // For simplicity, mint all as H1 (phase=1) and Founder tier (3)
+        for (uint256 i = 0; i < upgradeSigners.length; i++) {
+            citizenshipNFT.mintHuman(upgradeSigners[i], 3, 1, "");
+        }
+        for (uint256 i = 0; i < pauseSigners.length; i++) {
+            citizenshipNFT.mintHuman(pauseSigners[i], 3, 1, "");
+        }
+        for (uint256 i = 0; i < treasurySigners.length; i++) {
+            citizenshipNFT.mintHuman(treasurySigners[i], 3, 1, "");
+        }
+        for (uint256 i = 0; i < jurySigners.length; i++) {
+            citizenshipNFT.mintHuman(jurySigners[i], 3, 1, "");
+        }
+
+        // 8. Deploy Staking (will mint citizens when users stake)
         staking = new Staking(address(elys), address(citizenshipNFT));
         console.log("Staking deployed at:", address(staking));
 
-        // 7. Deploy Treasury
-        treasury = new ElysiumTreasury(initialSigners, msg.sender);
-        console.log("Treasury deployed at:", address(treasury));
+        // 9. Deploy multisig authorities
+        treasury = new ElysiumTreasuryMultiSig(treasurySigners, msg.sender, address(citizenshipNFT));
+        console.log("Treasury Multi-Sig deployed at:", address(treasury));
 
-        // 8. Deploy Governor
+        pauseMultiSig = new ElysiumPauseMultiSig(pauseSigners, msg.sender, address(citizenshipNFT));
+        console.log("Pause Multi-Sig deployed at:", address(pauseMultiSig));
+
+        upgradeMultiSig = new ElysiumUpgradeMultiSig(upgradeSigners, msg.sender, address(citizenshipNFT));
+        console.log("Upgrade Multi-Sig deployed at:", address(upgradeMultiSig));
+
+        citizenshipJury = new CitizenshipJury(jurySigners, msg.sender, address(citizenshipNFT));
+        console.log("Citizenship Jury deployed at:", address(citizenshipJury));
+
+        // 10. Deploy Governor
         governor = new ElysiumGovernor(
             citizenshipNFT,
             timelock,
@@ -72,19 +122,35 @@ contract DeployAll is Script {
         );
         console.log("Governor deployed at:", address(governor));
 
-        // 9. Set up roles and relationships
-        // Grant governor both proposer and executor roles on timelock
+        // 11. Set up roles and relationships
+
+        // Timelock: Governor is proposer and executor
         timelock.grantRole(keccak256("PROPOSER_ROLE"), address(governor));
         timelock.grantRole(keccak256("EXECUTOR_ROLE"), address(governor));
 
-        // Grant governor admin on treasury (to change signers)
+        // TreasuryMultiSig: Governor is admin to manage signers
         treasury.grantRole(keccak256("ADMIN_ROLE"), address(governor));
 
-        // For completeness, we could also make operatorRegistry manageable by governor
-        // operatorRegistry.grantRole(keccak256("DEFAULT_ADMIN_ROLE"), address(governor));
+        // PauseMultiSig: Governor admin
+        pauseMultiSig.grantRole(keccak256("ADMIN_ROLE"), address(governor));
 
-        // 10. Mint test tokens to treasury (for liquidity/awards later)
-        // elys.transfer(address(treasury), 100_000 * 10**18);
+        // UpgradeMultiSig: Governor admin
+        upgradeMultiSig.grantRole(keccak256("ADMIN_ROLE"), address(governor));
+
+        // CitizenshipJury: Governor admin
+        citizenshipJury.grantRole(keccak256("ADMIN_ROLE"), address(governor));
+
+        // CitizenshipNFT: Governor gets DEFAULT_ADMIN_ROLE to manage multisig roles and verifiers
+        citizenshipNFT.grantRole(keccak256("DEFAULT_ADMIN_ROLE"), address(governor));
+
+        // Staking: Grant PAUSER_ROLE to PauseMultiSig
+        staking.grantRole(keccak256("PAUSER_ROLE"), address(pauseMultiSig));
+
+        // Grant MINTER_ROLE on CitizenshipNFT to Staking so it can mint when users stake
+        citizenshipNFT.grantRole(keccak256("MINTER_ROLE"), address(staking));
+
+        // Grant JURY_ROLE on CitizenshipNFT to CitizenshipJury
+        citizenshipNFT.grantRole(keccak256("JURY_ROLE"), address(citizenshipJury));
 
         vm.stopBroadcast();
 
@@ -94,7 +160,10 @@ contract DeployAll is Script {
         console.log("Token:", address(elys));
         console.log("CitizenshipNFT:", address(citizenshipNFT));
         console.log("Staking:", address(staking));
-        console.log("Treasury:", address(treasury));
+        console.log("Treasury Multi-Sig:", address(treasury));
+        console.log("Pause Multi-Sig:", address(pauseMultiSig));
+        console.log("Upgrade Multi-Sig:", address(upgradeMultiSig));
+        console.log("Citizenship Jury:", address(citizenshipJury));
         console.log("OperatorRegistry:", address(operatorRegistry));
     }
 }

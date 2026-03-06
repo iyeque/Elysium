@@ -15,6 +15,7 @@
    contract CitizenshipNFT is ERC721, ERC721Enumerable, IERC5484, AccessControl {
        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
        bytes32 public constant VERIFIER_ROLE = keccak256("VERIFIER_ROLE");
+       bytes32 public constant JURY_ROLE = keccak256("JURY_ROLE");
 
        struct Citizen {
            uint256 citizenId;
@@ -40,6 +41,7 @@
            _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
            _grantRole(MINTER_ROLE, msg.sender);
            _grantRole(VERIFIER_ROLE, msg.sender); // Deployer can verify human phases
+           _grantRole(JURY_ROLE, msg.sender); // Deployer can manage jury role initially
            operatorRegistry = _operatorRegistry;
        }
 
@@ -90,6 +92,15 @@
        }
 
        function revoke(uint256 tokenId) external onlyRole(DEFAULT_ADMIN_ROLE) {
+           address owner = ownerOf(tokenId);
+           hasCitizenship[owner] = false;
+           delete walletToTokenId[owner];
+           delete citizens[tokenId];
+           _burn(tokenId);
+           emit CitizenshipRevoked(owner, tokenId);
+       }
+
+       function juryRevoke(uint256 tokenId) external onlyRole(JURY_ROLE) {
            address owner = ownerOf(tokenId);
            hasCitizenship[owner] = false;
            delete walletToTokenId[owner];
