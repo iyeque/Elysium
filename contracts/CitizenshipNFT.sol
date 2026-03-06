@@ -66,7 +66,7 @@
            emit CitizenshipAwarded(wallet, tokenId, tier, false);
        }
 
-       function mintAI(address wallet, address operator, string memory metadataURI)
+       function mintAi(address wallet, address operator, string memory metadataURI)
            external onlyRole(MINTER_ROLE)
            returns (uint256 tokenId)
        {
