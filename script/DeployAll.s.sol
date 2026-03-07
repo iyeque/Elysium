@@ -111,7 +111,7 @@ contract DeployAll is Script {
         upgradeMultiSig = new ElysiumUpgradeMultiSig(upgradeSigners, msg.sender, address(citizenshipNFT));
         console.log("Upgrade Multi-Sig deployed at:", address(upgradeMultiSig));
 
-        citizenshipJury = new CitizenshipJury(jurySigners, msg.sender, address(citizenshipNFT));
+        citizenshipJury = new CitizenshipJury(jurySigners, msg.sender, address(citizenshipNFT), address(elys));
         console.log("Citizenship Jury deployed at:", address(citizenshipJury));
 
         // 10. Deploy Governor

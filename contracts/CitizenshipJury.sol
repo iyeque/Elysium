@@ -3,6 +3,8 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./CitizenshipNFT.sol";
 
 contract CitizenshipJury is ReentrancyGuard, AccessControl {
@@ -12,6 +14,29 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     uint256 public constant REQUIRED_SIGNATURES = 3;
     uint256 private constant MAX_SIGNERS = 5;
 
+    // ELYS token for challenge deposits
+    IERC20 public elys;
+    uint256 public constant CHALLENGE_DEPOSIT = 1000 * 1e18; // 1000 ELYS
+        address public constant BURN_ADDRESS = 0x000000000000000000000000000000000000dEaD;
+
+    // Challenge data
+    struct Challenge {
+        uint256 tokenId;
+        address challenger;
+        uint256 deposit;
+        uint256 createdAt;
+        uint256 votesFor;
+        uint256 votesAgainst;
+        bool executed;
+    }
+
+    uint256 public nextChallengeId = 1;
+    mapping(uint256 => Challenge) public challenges; // challengeId -> Challenge
+    mapping(uint256 => uint256) public tokenIdToChallengeId; // active challenge per token
+    mapping(uint256 => mapping(address => bool)) public voted; // challengeId -> voter
+    mapping(uint256 => address[]) public challengeJurors; // challengeId -> selected juror addresses
+
+    // Existing multisig fields
     struct Transaction {
         uint256 value;
         address to;
@@ -23,11 +48,16 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     Transaction[] public transactions;
     mapping(uint256 => mapping(address => bool)) public isConfirmed;
     mapping(address => bool) public isSigner;
-
     uint256 public nextTransactionId = 1;
 
     CitizenshipNFT public immutable citizenshipNFT;
 
+    // Events for challenges
+    event ChallengeCreated(uint256 indexed challengeId, uint256 indexed tokenId, address indexed challenger, address[] jurors);
+    event VoteCast(uint256 indexed challengeId, address indexed juror, bool support);
+    event ChallengeExecuted(uint256 indexed challengeId, bool revoked);
+
+    // Existing events
     event TransactionSubmitted(uint256 indexed txId, address indexed to, uint256 value, bytes data);
     event TransactionConfirmed(uint256 indexed txId, address indexed confirmer);
     event TransactionExecuted(uint256 indexed txId, address indexed to, uint256 value);
@@ -35,22 +65,25 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     event SignerAdded(address indexed signer);
     event SignerRemoved(address indexed signer);
 
-    constructor(address[] memory _initialSigners, address _admin, address _citizenshipNft) {
+    constructor(address[] memory _initialSigners, address _admin, address _citizenshipNft, address _elys) {
         require(_initialSigners.length <= MAX_SIGNERS, "CitizenshipJury: too many signers");
         require(_initialSigners.length >= REQUIRED_SIGNATURES, "CitizenshipJury: too few signers");
         citizenshipNFT = CitizenshipNFT(_citizenshipNft);
+        elys = IERC20(_elys);
         _grantRole(DEFAULT_ADMIN_ROLE, _admin);
         for (uint256 i = 0; i < _initialSigners.length; i++) {
             _addSigner(_initialSigners[i]);
         }
     }
 
+    // --- Existing multisig functions (unchanged) ---
+
     function _checkEligibility(address signer) internal view returns (bool) {
         uint256 tokenId = citizenshipNFT.citizenTokenId(signer);
         if (tokenId == 0) return false;
         CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
         if (citizen.isAI) return false;
-        if (citizen.tier < 2) return false; // Citizen tier or higher (>=2)
+        if (citizen.tier < 2) return false; // at least Citizen tier
         // H1 or H2 (phase 1 or 2)
         if (citizen.phase != 1 && citizen.phase != 2) return false;
         return true;
@@ -123,4 +156,136 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
 
     receive() external payable {}
     fallback() external payable {}
+
+    // --- Identity Challenge System ---
+
+    function createChallenge(uint256 tokenId) external nonReentrant {
+        require(tokenId > 0, "CitizenshipJury: invalid token");
+        CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
+        require(citizen.wallet != address(0), "CitizenshipJury: not a citizen");
+        require(tokenIdToChallengeId[tokenId] == 0, "CitizenshipJury: already challenged");
+        // Transfer deposit from challenger
+        require(elys.transferFrom(msg.sender, address(this), CHALLENGE_DEPOSIT), "CitizenshipJury: deposit transfer failed");
+
+        uint256 challengeId = nextChallengeId++;
+        Challenge storage c = challenges[challengeId];
+        c.tokenId = tokenId;
+        c.challenger = msg.sender;
+        c.deposit = CHALLENGE_DEPOSIT;
+        c.createdAt = block.timestamp;
+        c.votesFor = 0;
+        c.votesAgainst = 0;
+        c.executed = false;
+
+        tokenIdToChallengeId[tokenId] = challengeId;
+
+        // Select 5 random jurors (exclude challenger)
+        address[] memory jurors = _selectRandomJurors(challengeId, msg.sender);
+        challengeJurors[challengeId] = jurors;
+
+        emit ChallengeCreated(challengeId, tokenId, msg.sender, jurors);
+    }
+
+    function vote(uint256 challengeId, bool support) external nonReentrant {
+        Challenge storage c = challenges[challengeId];
+        require(!c.executed, "CitizenshipJury: challenge executed");
+        // Allow voting until finalized; multiple votes not allowed
+        require(!voted[challengeId][msg.sender], "CitizenshipJury: already voted");
+        address[] memory jurors = challengeJurors[challengeId];
+        bool isJuror = false;
+        for (uint256 i = 0; i < jurors.length; i++) {
+            if (jurors[i] == msg.sender) {
+                isJuror = true;
+                break;
+            }
+        }
+        require(isJuror, "CitizenshipJury: not a juror");
+        voted[challengeId][msg.sender] = true;
+        if (support) {
+            c.votesFor++;
+        } else {
+            c.votesAgainst++;
+        }
+        emit VoteCast(challengeId, msg.sender, support);
+    }
+
+    function finalizeChallenge(uint256 challengeId) external nonReentrant {
+        Challenge storage c = challenges[challengeId];
+        require(!c.executed, "CitizenshipJury: challenge executed");
+        uint256 totalVotes = c.votesFor + c.votesAgainst;
+        require(totalVotes >= REQUIRED_SIGNATURES, "CitizenshipJury: not enough votes");
+        c.executed = true;
+
+        bool revoked = false;
+        if (c.votesFor > c.votesAgainst) {
+            // Majority to revoke
+            citizenshipNFT.juryRevoke(c.tokenId);
+            // Burn deposit
+            elys.transfer(BURN_ADDRESS, c.deposit);
+            revoked = true;
+        } else {
+            // Refund deposit to challenger
+            elys.transfer(c.challenger, c.deposit);
+        }
+
+        delete tokenIdToChallengeId[c.tokenId];
+        emit ChallengeExecuted(challengeId, revoked);
+    }
+
+    function _selectRandomJurors(uint256 challengeId, address challenger) internal returns (address[] memory) {
+        uint256 total = citizenshipNFT.totalSupply();
+        // First pass: count eligible
+        uint256 eligibleCount = 0;
+        for (uint256 i = 0; i < total; i++) {
+            uint256 tokenId = citizenshipNFT.tokenByIndex(i);
+            if (tokenId == 0) continue;
+            CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
+            // Use _checkEligibility to ensure human non-AI Citizen with H1/H2
+            if (_checkEligibility(citizen.wallet) && citizen.wallet != challenger) {
+                eligibleCount++;
+            }
+        }
+        require(eligibleCount >= MAX_SIGNERS, "CitizenshipJury: insufficient eligible jurors");
+
+        // Build array of eligible addresses
+        address[] memory eligible = new address[](eligibleCount);
+        uint256 idx = 0;
+        for (uint256 i = 0; i < total; i++) {
+            uint256 tokenId = citizenshipNFT.tokenByIndex(i);
+            if (tokenId == 0) continue;
+            CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
+            if (_checkEligibility(citizen.wallet) && citizen.wallet != challenger) {
+                eligible[idx] = citizen.wallet;
+                idx++;
+            }
+        }
+
+        // Randomly select MAX_SIGNERS distinct addresses
+        address[] memory selected = new address[](MAX_SIGNERS);
+        uint256 seed = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, challengeId)));
+        uint256 poolSize = eligibleCount;
+        // Mutable copy of eligible pool
+        address[] memory pool = new address[](eligibleCount);
+        for (uint256 i = 0; i < eligibleCount; i++) {
+            pool[i] = eligible[i];
+        }
+        for (uint256 i = 0; i < MAX_SIGNERS; i++) {
+            seed = uint256(keccak256(abi.encodePacked(seed)));
+            uint256 pick = seed % poolSize;
+            selected[i] = pool[pick];
+            // Swap picked with last and reduce pool size
+            pool[pick] = pool[poolSize - 1];
+            poolSize--;
+        }
+        return selected;
+    }
+
+    // Optional: Get status of a challenge
+    function getChallenge(uint256 challengeId) external view returns (Challenge memory) {
+        return challenges[challengeId];
+    }
+
+    function getJurors(uint256 challengeId) external view returns (address[] memory) {
+        return challengeJurors[challengeId];
+    }
 }
