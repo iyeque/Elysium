@@ -95,6 +95,12 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         // AI phase check: AI may only propose in Phase 3? Actually Constitution says AI advisory only in Phase 1; Phase 2 they can propose? It says Phase 2: 0.5x vote weight on technical matters only; doesn't mention proposing. Likely AI can propose in Phase 2+? For now, allow any phase >=2? Simpler: allow AI to propose any, but voting weight will be limited.
         
         // Determine tier from proposal type
+        // AI proposal restrictions: only technical proposals (ParameterChange) in Phase 1/2
+        if (citizen.isAI) {
+            if (citizen.phase == 1 || citizen.phase == 2) {
+                require(proposalType == ProposalType.ParameterChange, "Governor: AI may only propose technical parameters");
+            }
+        }
         Tier tier = _getTierFromType(proposalType);
         
         // Create description with title and type
@@ -176,8 +182,8 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
                 // Phase 1: Advisory only, no voting
                 return 0;
             } else if (citizen.phase == 2) {
-                // Phase 2: 0.5x weight (simplified - should be restricted to technical proposals only)
-                return (1 ether * 5000) / 10000; // 0.5x
+                // Phase 2: 0.2x weight (20% vote cap)
+                return (1 ether * 2000) / 10000; // 0.2x
             } else if (citizen.phase >= 3) {
                 // Phase 3: Full equality
                 return 1 ether;
