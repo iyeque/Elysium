@@ -94,6 +94,11 @@ contract ElysiumGovernorFounderVetoTest is Test {
     }
 
     function test_VetoFailsTooEarly() public {
+        // Set a sufficiently large base timestamp so that eta - 72 hours is still positive
+        // (Avoid underflow when computing eta - 72h)
+        uint256 baseTimestamp = 1_000_000;
+        vm.warp(baseTimestamp);
+        
         vm.prank(human1);
         uint256 proposalId = governor.propose(
             ElysiumGovernor.ProposalType.ParameterChange,
@@ -110,6 +115,7 @@ contract ElysiumGovernorFounderVetoTest is Test {
         vm.prank(human1);
         governor.queue(_buildTargets(address(0)), _buildValues(0), _buildCalldatas(""), descriptionHash);
         uint256 eta = governor.proposalEta(proposalId);
+        // Now warp to 72 hours before eta (which is safely before the 48h veto window)
         vm.warp(eta - 72 hours);
         
         vm.prank(founder);
