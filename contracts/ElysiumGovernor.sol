@@ -63,6 +63,11 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
     // Veto tracking
     mapping(uint256 => bool) public proposalVetoed;
     
+    // AI vote tracking (for cap enforcement)
+    mapping(uint256 => uint256) private aiForVotes;
+    mapping(uint256 => uint256) private aiAgainstVotes;
+    // Note: AI abstentions not tracked (unlikely)
+    
     // Events
     event ProposalTypeSet(uint256 indexed proposalId, ProposalType proposalType, Tier tier);
     event ProposalVetoed(uint256 indexed proposalId, address indexed founder, uint256 timestamp);
@@ -228,8 +233,8 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
                 // Phase 1: Advisory only, no voting
                 return 0;
             } else if (citizen.phase == 2) {
-                // Phase 2: 0.2x weight (20% vote cap)
-                return (1 ether * 2000) / 10000; // 0.2x
+                // Phase 2: 0.5x weight (50%) on technical matters only, capped at 20% of total votes
+                return (1 ether * 5000) / 10000; // 0.5x
             } else if (citizen.phase >= 3) {
                 // Phase 3: Full equality
                 return 1 ether;
@@ -296,17 +301,78 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
      * - MultiSigElection: 51% majority
      * Note: Quorum is checked separately via _quorumReached.
      */
-    function _voteSucceeded(uint256 proposalId) internal view override(Governor, GovernorCountingSimple) returns (bool) {
+    /**
+     * @dev Override to track AI votes separately and enforce AI Phase 2 technical voting restriction.
+     */
+    function _countVote(
+        uint256 proposalId,
+        address account,
+        uint8 support,
+        uint256 weight,
+        bytes memory params
+    ) internal virtual override(Governor, GovernorCountingSimple) {
+        // Check if voter is AI and track for AI cap
+        uint256 tokenId = citizenshipNFT.citizenTokenId(account);
+        if (tokenId > 0) {
+            CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
+            if (citizen.isAI && citizen.phase >= 2) {
+                // AI Phase 2 can only vote on technical proposals (ParameterChange)
+                if (citizen.phase == 2) {
+                    ProposalType pType = proposalTypes[proposalId];
+                    require(pType == ProposalType.ParameterChange, "Governor: AI Phase 2 only technical");
+                }
+                // Record AI votes separately (for/against; ignore abstain)
+                if (support == 1) {
+                    aiForVotes[proposalId] += weight;
+                } else if (support == 0) {
+                    aiAgainstVotes[proposalId] += weight;
+                }
+            }
+        }
+        // Continue with standard counting
+        super._countVote(proposalId, account, support, weight, params);
+    }
+
+    /**
+     * @dev Apply AI vote cap (20% of total votes) to get effective vote counts.
+     */
+    function _applyAICap(
+        uint256 forVotes,
+        uint256 againstVotes,
+        uint256 aiFor,
+        uint256 aiAgainst
+    ) internal pure returns (uint256 effectiveFor, uint256 effectiveAgainst) {
+        if (aiFor == 0 && aiAgainst == 0) {
+            return (forVotes, againstVotes);
+        }
+        uint256 total = forVotes + againstVotes;
+        uint256 aiTotal = aiFor + aiAgainst;
+        uint256 aiCap = (total * 20) / 10000; // 20% cap
+        if (aiTotal <= aiCap) {
+            return (forVotes, againstVotes);
+        }
+        // Scale down AI votes proportionally
+        uint256 scaledAiFor = (aiFor * aiCap) / aiTotal;
+        uint256 scaledAiAgainst = (aiAgainst * aiCap) / aiTotal;
+        effectiveFor = (forVotes - aiFor) + scaledAiFor;
+        effectiveAgainst = (againstVotes - aiAgainst) + scaledAiAgainst;
+    }
+
+    function _voteSucceeded(uint256 proposalId) internal view virtual override(Governor, GovernorCountingSimple) returns (bool) {
         ProposalType proposalType = proposalTypes[proposalId];
         (uint256 againstVotes, uint256 forVotes, ) = proposalVotes(proposalId);
-        uint256 totalVotes = forVotes + againstVotes;
-        if (totalVotes == 0) {
+        uint256 aiFor = aiForVotes[proposalId];
+        uint256 aiAgainst = aiAgainstVotes[proposalId];
+
+        (uint256 effectiveFor, uint256 effectiveAgainst) = _applyAICap(forVotes, againstVotes, aiFor, aiAgainst);
+        uint256 effectiveTotal = effectiveFor + effectiveAgainst;
+        if (effectiveTotal == 0) {
             return false;
         }
-        
-        uint256 numerator = forVotes * 10000;
+
+        uint256 numerator = effectiveFor * 10000;
         uint256 requiredPercentage;
-        
+
         if (proposalType == ProposalType.CorePrinciple) {
             requiredPercentage = 8000; // 80%
         } else if (proposalType == ProposalType.Constitutional || 
@@ -317,10 +383,10 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
             requiredPercentage = 6000; // 60%
         } else {
             // Simple majority: >50%
-            return forVotes > againstVotes;
+            return effectiveFor > effectiveAgainst;
         }
-        
-        return numerator >= totalVotes * requiredPercentage;
+
+        return numerator >= effectiveTotal * requiredPercentage;
     }
     
     // Required overrides for GovernorTimelockControl

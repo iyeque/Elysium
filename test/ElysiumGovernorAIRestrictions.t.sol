@@ -60,7 +60,7 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
     function test_AI_Phase2_VoteWeight() public {
         citizenshipNFT.updatePhase(aiTokenId, 2);
         uint256 votes = governor.getVotes(aiWallet, block.number);
-        assertEq(votes, (1 ether * 2000) / 10000); // 0.2x
+        assertEq(votes, (1 ether * 5000) / 10000); // 0.5x
     }
 
     function test_AI_Phase3_VoteWeight() public {
