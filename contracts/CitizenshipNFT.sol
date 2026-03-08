@@ -16,6 +16,7 @@
        bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
        bytes32 public constant VERIFIER_ROLE = keccak256("VERIFIER_ROLE");
        bytes32 public constant JURY_ROLE = keccak256("JURY_ROLE");
+       bytes32 public constant MERIT_GRANTOR_ROLE = keccak256("MERIT_GRANTOR_ROLE");
 
        struct Citizen {
            uint256 citizenId;
@@ -32,6 +33,11 @@
        address public operatorRegistry;
        uint256 public nextCitizenId = 1;
        mapping(address => bool) public hasCitizenship;
+       mapping(address => bool) public isVerified;
+
+       event Verified(address indexed citizen, bool verified);
+       event MeritGrant(address indexed to, uint256 tokenId, uint256 tier, uint256 phase);
+
        uint256 public constant MAX_AI_PER_OPERATOR = 10;
 
        event CitizenshipAwarded(address indexed to, uint256 tokenId, uint256 tier, bool isAI);
@@ -42,6 +48,7 @@
            _grantRole(MINTER_ROLE, msg.sender);
            _grantRole(VERIFIER_ROLE, msg.sender); // Deployer can verify human phases
            _grantRole(JURY_ROLE, msg.sender); // Deployer can manage jury role initially
+           _grantRole(MERIT_GRANTOR_ROLE, msg.sender); // Deployer can grant merit citizenship
            operatorRegistry = _operatorRegistry;
        }
 
@@ -64,6 +71,32 @@
            hasCitizenship[wallet] = true;
            walletToTokenId[wallet] = tokenId;
            emit CitizenshipAwarded(wallet, tokenId, tier, false);
+       }
+
+       /**
+        * @dev Grant merit-based citizenship (free NFT) to an eligible candidate.
+        * Only accounts with MERIT_GRANTOR_ROLE can call this.
+        */
+       function grantMerit(address wallet, uint256 tier, uint256 phase, string memory metadataURI)
+           external onlyRole(MERIT_GRANTOR_ROLE)
+           returns (uint256 tokenId)
+       {
+           require(!hasCitizenship[wallet], "Citizenship: already a citizen");
+           tokenId = nextCitizenId++;
+           _mint(wallet, tokenId);
+           citizens[tokenId] = Citizen({
+               citizenId: tokenId,
+               wallet: wallet,
+               tier: tier,
+               phase: phase,
+               createdAt: block.timestamp,
+               isAI: false,
+               metadataURI: metadataURI
+           });
+           hasCitizenship[wallet] = true;
+           walletToTokenId[wallet] = tokenId;
+           emit CitizenshipAwarded(wallet, tokenId, tier, false);
+           emit MeritGrant(wallet, tokenId, tier, phase);
        }
 
        function mintAi(address wallet, address operator, string memory metadataURI)
@@ -118,6 +151,24 @@
            require(_ownerOf(tokenId) != address(0), "Citizenship: token does not exist");
            require(newPhase >= 1 && newPhase <= 3, "Citizenship: invalid phase");
            citizens[tokenId].phase = newPhase;
+       }
+
+       /**
+        * @dev Verify that a human citizen has been validated for a specific phase.
+        * Marks the citizen as isVerified = true and updates their phase if provided.
+        * Only callable by accounts with VERIFIER_ROLE.
+        */
+       function verifyHumanPhase(address wallet, uint256 phase) external onlyRole(VERIFIER_ROLE) {
+           uint256 tokenId = walletToTokenId[wallet];
+           require(tokenId > 0 && _ownerOf(tokenId) != address(0), "Citizenship: not a citizen");
+           Citizen storage citizen = citizens[tokenId];
+           require(!citizen.isAI, "Citizenship: AI cannot verify");
+           // Update phase if different and valid (1-3)
+           if (phase >= 1 && phase <= 3) {
+               citizen.phase = phase;
+           }
+           isVerified[wallet] = true;
+           emit Verified(wallet, true);
        }
 
        function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
