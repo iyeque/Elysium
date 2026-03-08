@@ -68,6 +68,9 @@ contract CitizenshipJuryChallengeTest is Test {
         address target = address(0x20);
         citizenshipNFT.mintHuman(target, 2, 1, "");
         targetTokenId = citizenshipNFT.citizenTokenId(target);
+        
+        // Mint challenger as H2 (tier 2, phase 2) so they must pay deposit
+        citizenshipNFT.mintHuman(challenger, 2, 2, "");
     }
 
     function test_ChallengeAndRevoke_Success() public {
@@ -207,5 +210,63 @@ contract CitizenshipJuryChallengeTest is Test {
         vm.expectRevert("CitizenshipJury: already challenged");
         vm.prank(challenger);
         jury.createChallenge(targetTokenId);
+    }
+
+    function test_H1_ExemptFromDeposit() public {
+        _deployAndSetupCitizens();
+        // Create an H1 challenger (tier 2, phase 1)
+        address h1Challenger = address(0x30);
+        citizenshipNFT.mintHuman(h1Challenger, 2, 1, ""); // H1
+        
+        // H1 should be able to challenge without deposit
+        vm.prank(h1Challenger);
+        jury.createChallenge(targetTokenId);
+        
+        // Verify challenge was created with 0 deposit
+        (, address challengerAddr, uint256 deposit, , , , ) = jury.challenges(1);
+        assertEq(challengerAddr, h1Challenger);
+        assertEq(deposit, 0);
+    }
+
+    function test_H3_CannotChallenge() public {
+        _deployAndSetupCitizens();
+        // Create an H3 challenger (tier 2, phase 3)
+        address h3Challenger = address(0x31);
+        citizenshipNFT.mintHuman(h3Challenger, 2, 3, ""); // H3
+        
+        vm.expectRevert("CitizenshipJury: H3 cannot challenge");
+        vm.prank(h3Challenger);
+        jury.createChallenge(targetTokenId);
+    }
+
+    function test_ChallengeRateLimit() public {
+        _deployAndSetupCitizens();
+        // Challenger needs ELYS for deposits
+        vm.prank(admin);
+        elys.transfer(challenger, 10000 * 1e18);
+        vm.prank(challenger);
+        elys.approve(address(jury), CHALLENGE_DEPOSIT * 4);
+        
+        // Create 3 challenges (the limit)
+        address[] memory targets = new address[](3);
+        targets[0] = address(0x40);
+        targets[1] = address(0x41);
+        targets[2] = address(0x42);
+        
+        for (uint256 i = 0; i < 3; i++) {
+            citizenshipNFT.mintHuman(targets[i], 2, 1, "");
+            uint256 tokenId = citizenshipNFT.citizenTokenId(targets[i]);
+            vm.prank(challenger);
+            jury.createChallenge(tokenId);
+        }
+        
+        // 4th challenge should fail
+        address target4 = address(0x43);
+        citizenshipNFT.mintHuman(target4, 2, 1, "");
+        uint256 tokenId4 = citizenshipNFT.citizenTokenId(target4);
+        
+        vm.expectRevert("CitizenshipJury: challenge limit reached");
+        vm.prank(challenger);
+        jury.createChallenge(tokenId4);
     }
 }

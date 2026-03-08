@@ -17,7 +17,13 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     // ELYS token for challenge deposits
     IERC20 public elys;
     uint256 public constant CHALLENGE_DEPOSIT = 1000 * 1e18; // 1000 ELYS
-        address public constant BURN_ADDRESS = 0x000000000000000000000000000000000000dEaD;
+    uint256 public constant H1_CHALLENGE_DEPOSIT = 0; // H1 exempt from deposit
+    uint256 public constant MAX_CHALLENGES_PER_30_DAYS = 3;
+    uint256 public constant CHALLENGE_WINDOW = 30 days;
+    address public constant BURN_ADDRESS = 0x000000000000000000000000000000000000dEaD;
+
+    // Challenge rate limiting: track challenge timestamps per address
+    mapping(address => uint256[]) public challengeTimestamps; // challenger -> array of challenge timestamps
 
     // Challenge data
     struct Challenge {
@@ -159,25 +165,71 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
 
     // --- Identity Challenge System ---
 
+    /**
+     * @dev Check if challenger is eligible and return required deposit.
+     * H3 and AI cannot challenge. H1 is exempt from deposit.
+     */
+    function _checkChallengerEligibility(address challenger) internal view returns (uint256 deposit) {
+        uint256 tokenId = citizenshipNFT.citizenTokenId(challenger);
+        require(tokenId > 0, "CitizenshipJury: challenger not a citizen");
+        
+        CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
+        
+        // AI cannot challenge
+        require(!citizen.isAI, "CitizenshipJury: AI cannot challenge");
+        
+        // H3 (phase 3) cannot challenge
+        require(citizen.phase != 3, "CitizenshipJury: H3 cannot challenge");
+        
+        // Check rate limit: max 3 challenges per 30 days
+        uint256[] memory timestamps = challengeTimestamps[challenger];
+        uint256 recentCount = 0;
+        // Use unchecked subtraction to avoid underflow when block.timestamp < CHALLENGE_WINDOW
+        uint256 windowStart = block.timestamp > CHALLENGE_WINDOW ? block.timestamp - CHALLENGE_WINDOW : 0;
+        for (uint256 i = 0; i < timestamps.length; i++) {
+            if (timestamps[i] > windowStart) {
+                recentCount++;
+            }
+        }
+        require(recentCount < MAX_CHALLENGES_PER_30_DAYS, "CitizenshipJury: challenge limit reached");
+        
+        // H1 (tier 2, phase 1) is exempt from deposit
+        if (citizen.tier == 2 && citizen.phase == 1) {
+            return 0;
+        }
+        
+        // H2 (tier 2, phase 2) must pay deposit
+        return CHALLENGE_DEPOSIT;
+    }
+
     function createChallenge(uint256 tokenId) external nonReentrant {
         require(tokenId > 0, "CitizenshipJury: invalid token");
         CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
         require(citizen.wallet != address(0), "CitizenshipJury: not a citizen");
         require(tokenIdToChallengeId[tokenId] == 0, "CitizenshipJury: already challenged");
-        // Transfer deposit from challenger
-        require(elys.transferFrom(msg.sender, address(this), CHALLENGE_DEPOSIT), "CitizenshipJury: deposit transfer failed");
+        
+        // Check challenger eligibility and get required deposit
+        uint256 requiredDeposit = _checkChallengerEligibility(msg.sender);
+        
+        // Transfer deposit if required
+        if (requiredDeposit > 0) {
+            require(elys.transferFrom(msg.sender, address(this), requiredDeposit), "CitizenshipJury: deposit transfer failed");
+        }
 
         uint256 challengeId = nextChallengeId++;
         Challenge storage c = challenges[challengeId];
         c.tokenId = tokenId;
         c.challenger = msg.sender;
-        c.deposit = CHALLENGE_DEPOSIT;
+        c.deposit = requiredDeposit;
         c.createdAt = block.timestamp;
         c.votesFor = 0;
         c.votesAgainst = 0;
         c.executed = false;
 
         tokenIdToChallengeId[tokenId] = challengeId;
+        
+        // Record challenge timestamp for rate limiting
+        challengeTimestamps[msg.sender].push(block.timestamp);
 
         // Select 5 random jurors (exclude challenger)
         address[] memory jurors = _selectRandomJurors(challengeId, msg.sender);
