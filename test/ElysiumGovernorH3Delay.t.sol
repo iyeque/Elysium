@@ -34,7 +34,7 @@ contract ElysiumGovernorH3DelayTest is Test {
         timelock = new TimelockController(1 days, new address[](0), new address[](0), address(this));
         
         // Governor will be set as proposer/executor after deployment
-        governor = new ElysiumGovernor(citizenshipNFT, timelock, "Elysium");
+        governor = new ElysiumGovernor(citizenshipNFT, timelock, "Elysium", admin);
         
         // Grant timelock roles to governor (admin is test contract)
         vm.prank(admin);

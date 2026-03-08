@@ -114,11 +114,12 @@ contract DeployAll is Script {
         citizenshipJury = new CitizenshipJury(jurySigners, msg.sender, address(citizenshipNFT), address(elys));
         console.log("Citizenship Jury deployed at:", address(citizenshipJury));
 
-        // 10. Deploy Governor
+        // 10. Deploy Governor (msg.sender as initial Founder for veto window)
         governor = new ElysiumGovernor(
             citizenshipNFT,
             timelock,
-            "Elysium Governor"
+            "Elysium Governor",
+            msg.sender
         );
         console.log("Governor deployed at:", address(governor));
 

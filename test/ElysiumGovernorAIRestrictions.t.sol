@@ -35,8 +35,8 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
         // Deploy TimelockController (2 days delay, empty proposers/executors, admin)
         timelock = new TimelockController(2 days, new address[](0), new address[](0), admin);
 
-        // Deploy Governor
-        governor = new ElysiumGovernor(citizenshipNFT, timelock, "Elysium");
+        // Deploy Governor (founder address for veto window)
+        governor = new ElysiumGovernor(citizenshipNFT, timelock, "Elysium", admin);
 
         // Grant Timelock roles to Governor
         timelock.grantRole(timelock.PROPOSER_ROLE(), address(governor));

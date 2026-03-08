@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/governance/extensions/GovernorSettings.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
 import "@openzeppelin/contracts/governance/extensions/GovernorTimelockControl.sol";
 import "@openzeppelin/contracts/governance/TimelockController.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 import "./CitizenshipNFT.sol";
 
 /**
@@ -16,7 +17,7 @@ import "./CitizenshipNFT.sol";
  * Quorum: Tier1=10%, Tier2=25%, Tier3=40%
  * Majority: Simple=51%, Supermajority=67%, Core=80%
  */
-contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorTimelockControl {
+contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, GovernorTimelockControl, AccessControl {
     
     // Proposal types per Constitution
     enum ProposalType {
@@ -53,19 +54,32 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
     mapping(uint256 => ProposalType) public proposalTypes;
     mapping(uint256 => Tier) public proposalTiers;
     
+    // Founder Veto Window (Constitution Article VIII)
+    bytes32 public constant FOUNDER_ROLE = keccak256("FOUNDER_ROLE");
+    uint48 public immutable deploymentTime;
+    uint256 public constant VETO_WINDOW = 48 hours;
+    uint256 public constant SUNSET_PERIOD = 3 * 365 days;
+    
+    // Veto tracking
+    mapping(uint256 => bool) public proposalVetoed;
+    
     // Events
     event ProposalTypeSet(uint256 indexed proposalId, ProposalType proposalType, Tier tier);
+    event ProposalVetoed(uint256 indexed proposalId, address indexed founder, uint256 timestamp);
     
     constructor(
         CitizenshipNFT _citizenshipNFT,
         TimelockController _timelock,
-        string memory name
+        string memory name,
+        address founder
     ) 
         Governor(name)
         GovernorSettings(1 days, 7 days, 0)  // votingDelay, votingPeriod, proposalThreshold
         GovernorTimelockControl(_timelock)
     {
         citizenshipNFT = _citizenshipNFT;
+        deploymentTime = uint48(block.timestamp);
+        _grantRole(FOUNDER_ROLE, founder);
     }
     
     /**
@@ -114,6 +128,38 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         emit ProposalTypeSet(proposalId, proposalType, tier);
         
         return proposalId;
+    }
+    
+    /**
+     * @dev Founder veto: veto a queued proposal within 48 hours of execution
+     * Only callable by FOUNDER_ROLE, and only within 3 years of deployment
+     * Constitution Article VIII: Founder Veto Window
+     */
+    function vetoProposal(uint256 proposalId) external onlyRole(FOUNDER_ROLE) {
+        // Check proposal is queued (waiting for execution)
+        require(state(proposalId) == ProposalState.Queued, "Governor: proposal not queued");
+        
+        // Get proposal eta (execution time)
+        uint256 eta = proposalEta(proposalId);
+        require(eta > 0, "Governor: proposal has no eta");
+        
+        // Ensure within 3-year sunset period from deployment (check first)
+        require(
+            block.timestamp < deploymentTime + SUNSET_PERIOD,
+            "Governor: veto window has sunset"
+        );
+        
+        // Ensure within 48-hour window before execution
+        // Must be before eta
+        require(block.timestamp < eta, "Governor: veto only allowed within 48h of execution");
+        // And within VETO_WINDOW of eta (now safe because block.timestamp < eta)
+        require(eta - block.timestamp <= VETO_WINDOW, "Governor: veto only allowed within 48h of execution");
+        
+        // Check not already vetoed
+        require(!proposalVetoed[proposalId], "Governor: proposal already vetoed");
+        
+        proposalVetoed[proposalId] = true;
+        emit ProposalVetoed(proposalId, msg.sender, block.timestamp);
     }
     
     /**
@@ -331,6 +377,7 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         bytes[] memory calldatas,
         bytes32 descriptionHash
     ) internal override(Governor, GovernorTimelockControl) {
+        require(!proposalVetoed[proposalId], "Governor: proposal vetoed");
         super._executeOperations(proposalId, targets, values, calldatas, descriptionHash);
     }
     
@@ -350,5 +397,18 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         returns (address)
     {
         return super._executor();
+    }
+    
+    
+    /**
+     * @dev Support interfaces (required for AccessControl + Governor)
+     */
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(Governor, AccessControl)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
     }
 }
