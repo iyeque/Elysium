@@ -22,8 +22,17 @@
    - Deposit burned if citizenship revoked
 
 ## 🟡 Priority 2: Verification & Access Control
-4. **Verifier Integration** – Implement `verifyHumanPhase(address citizen, uint256 phase)` using BrightID/Gitcoin/Worldcoin proofs. Possibly a Verifier contract with `VERIFIER_ROLE`.
-5. **Merit Grants** – Allocate 5% of airdrop (50M $ELYS) for merit-based citizenship; allow a multi-sig or jury to grant free Citizen tier NFTs to selected candidates.
+4. **Verifier Integration** – ✅ **COMPLETE** (2026-03-09)
+   - Added `isVerified` mapping and `Verified` event
+   - `verifyHumanPhase(address wallet, uint256 phase)` only callable by `VERIFIER_ROLE`
+   - Updates citizen phase and marks as verified
+   - 4 tests passing (unauthorized, AI revert, non-citizen revert, multiple verifies)
+   
+5. **Merit Grants** – ✅ **COMPLETE** (2026-03-09)
+   - Added `MERIT_GRANTOR_ROLE` (deployer gets it initially)
+   - `grantMerit(address wallet, uint256 tier, uint256 phase, string metadataURI)` free mint
+   - 4 tests: onlyGrantor, nonGrantorReverts, alreadyCitizenReverts, emitsEvents
+   - Total tests: 52 passing
 
 ## 🟢 Priority 3: Refinements & Compliance
 6. **Tier Timelocks** – Override `votingDelay()` and `votingPeriod()` in ElysiumGovernor to return different values per proposal tier (Tier1: 1d delay, 7d period; Tier2: 7d delay, 7d period; Tier3: 14d+ delay, 10d period).
