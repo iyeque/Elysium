@@ -58,12 +58,19 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
     }
 
     function test_AI_Phase2_VoteWeight() public {
+        // Wait 30 days before phase transition
+        vm.warp(block.timestamp + 30 days);
         citizenshipNFT.updatePhase(aiTokenId, 2);
         uint256 votes = governor.getVotes(aiWallet, block.number);
         assertEq(votes, (1 ether * 5000) / 10000); // 0.5x
     }
 
     function test_AI_Phase3_VoteWeight() public {
+        // First transition to phase 2 after 30 days
+        vm.warp(block.timestamp + 30 days);
+        citizenshipNFT.updatePhase(aiTokenId, 2);
+        // Then wait another 30 days to transition to phase 3
+        vm.warp(block.timestamp + 30 days);
         citizenshipNFT.updatePhase(aiTokenId, 3);
         uint256 votes = governor.getVotes(aiWallet, block.number);
         assertEq(votes, 1 ether);
@@ -75,6 +82,8 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
     }
 
     function test_AI_Phase2_Propose_ParameterChange_Allowed() public {
+        // Wait 30 days before phase transition
+        vm.warp(block.timestamp + 30 days);
         citizenshipNFT.updatePhase(aiTokenId, 2);
 
         // Dummy proposal with minimal non-empty arrays
@@ -114,6 +123,8 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
     }
 
     function test_AI_Phase2_Propose_TreasurySpendSmall_Reverts() public {
+        // Wait 30 days before phase transition
+        vm.warp(block.timestamp + 30 days);
         citizenshipNFT.updatePhase(aiTokenId, 2);
 
         address[] memory targets = new address[](1);
@@ -135,6 +146,8 @@ contract ElysiumGovernorAIRestrictionsTest is Test {
     }
 
     function test_AI_Phase2_Propose_Constitutional_Reverts() public {
+        // Wait 30 days before phase transition
+        vm.warp(block.timestamp + 30 days);
         citizenshipNFT.updatePhase(aiTokenId, 2);
 
         address[] memory targets = new address[](1);
