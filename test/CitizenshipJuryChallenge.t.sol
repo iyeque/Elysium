@@ -233,10 +233,37 @@ contract CitizenshipJuryChallengeTest is Test {
         // Create an H3 challenger (tier 2, phase 3)
         address h3Challenger = address(0x31);
         citizenshipNFT.mintHuman(h3Challenger, 2, 3, ""); // H3
-        
+
         vm.expectRevert("CitizenshipJury: H3 cannot challenge");
         vm.prank(h3Challenger);
         jury.createChallenge(targetTokenId);
+    }
+
+    function test_H3_CannotBeAddedAsSigner() public {
+        _deployAndSetupCitizens();
+        // Grant ADMIN_ROLE to this test contract so it can call addSigner
+        vm.prank(admin);
+        jury.grantRole(jury.ADMIN_ROLE(), admin);
+        // Create an H3 citizen
+        address h3 = address(0x32);
+        citizenshipNFT.mintHuman(h3, 2, 3, "");
+        vm.prank(admin);
+        vm.expectRevert("CitizenshipJury: ineligible signer");
+        jury.addSigner(h3);
+    }
+
+    function test_H3_CannotSubmitTransactionIfSigner() public {
+        _deployAndSetupCitizens();
+        // Grant SIGNER_ROLE directly to an H3 citizen (bypasses addSigner check)
+        address h3 = address(0x33);
+        citizenshipNFT.mintHuman(h3, 2, 3, "");
+        // Admin grants SIGNER_ROLE to h3
+        vm.prank(admin);
+        jury.grantRole(jury.SIGNER_ROLE(), h3);
+        // H3 attempts to submit a transaction, should revert with eligibility check
+        vm.prank(h3);
+        vm.expectRevert("CitizenshipJury: H3 cannot serve");
+        jury.submitTransaction(address(0), 0, "");
     }
 
     function test_ChallengeRateLimit() public {

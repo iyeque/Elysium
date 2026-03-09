@@ -24,6 +24,7 @@
            uint256 tier;
            uint256 phase;
            uint256 createdAt;
+           uint256 phaseLastUpdated; // Timestamp of last phase change (for 30-day cooldown)
            bool isAI;
            string metadataURI;
        }
@@ -65,6 +66,7 @@
                tier: tier,
                phase: phase,
                createdAt: block.timestamp,
+               phaseLastUpdated: block.timestamp,
                isAI: false,
                metadataURI: metadataURI
            });
@@ -90,6 +92,7 @@
                tier: tier,
                phase: phase,
                createdAt: block.timestamp,
+               phaseLastUpdated: block.timestamp,
                isAI: false,
                metadataURI: metadataURI
            });
@@ -116,6 +119,7 @@
                tier: 0,
                phase: 1, // AI Phase 1: Advisory (no voting)
                createdAt: block.timestamp,
+               phaseLastUpdated: block.timestamp,
                isAI: true,
                metadataURI: metadataURI
            });
@@ -150,7 +154,16 @@
        function updatePhase(uint256 tokenId, uint256 newPhase) external onlyRole(VERIFIER_ROLE) {
            require(_ownerOf(tokenId) != address(0), "Citizenship: token does not exist");
            require(newPhase >= 1 && newPhase <= 3, "Citizenship: invalid phase");
-           citizens[tokenId].phase = newPhase;
+           Citizen storage citizen = citizens[tokenId];
+           
+           // Enforce 30-day waiting period between phase transitions
+           require(block.timestamp >= citizen.phaseLastUpdated + 30 days, "Citizenship: 30-day waiting period not elapsed");
+           
+           // Enforce strict phase progression: can only increase by 1 (no skipping)
+           require(newPhase == citizen.phase + 1, "Citizenship: invalid phase transition (must increment by 1)");
+           
+           citizen.phase = newPhase;
+           citizen.phaseLastUpdated = block.timestamp;
        }
 
        /**

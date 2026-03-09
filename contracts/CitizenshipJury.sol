@@ -90,7 +90,7 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
         CitizenshipNFT.Citizen memory citizen = citizenshipNFT.getCitizen(tokenId);
         if (citizen.isAI) return false;
         if (citizen.tier < 2) return false; // at least Citizen tier
-        // H1 or H2 (phase 1 or 2)
+        // H1 or H2 (phase 1 or 2) only; H3 excluded
         if (citizen.phase != 1 && citizen.phase != 2) return false;
         return true;
     }
@@ -118,6 +118,7 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     }
 
     function submitTransaction(address to, uint256 value, bytes calldata data) external onlyRole(SIGNER_ROLE) {
+        require(_checkEligibility(msg.sender), "CitizenshipJury: H3 cannot serve");
         require(to != address(0) || value > 0 || data.length > 0, "CitizenshipJury: invalid transaction");
         uint256 txId = nextTransactionId++;
         transactions[txId] = Transaction({
@@ -134,6 +135,7 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     }
 
     function confirmTransaction(uint256 txId) external onlyRole(SIGNER_ROLE) {
+        require(_checkEligibility(msg.sender), "CitizenshipJury: H3 cannot serve");
         Transaction storage txn = transactions[txId];
         require(txn.value > 0 || txn.to != address(0) || txn.data.length > 0, "CitizenshipJury: invalid transaction");
         require(!txn.executed, "CitizenshipJury: already executed");
@@ -144,6 +146,7 @@ contract CitizenshipJury is ReentrancyGuard, AccessControl {
     }
 
     function executeTransaction(uint256 txId) external nonReentrant onlyRole(SIGNER_ROLE) {
+        require(_checkEligibility(msg.sender), "CitizenshipJury: H3 cannot serve");
         Transaction storage txn = transactions[txId];
         require(!txn.executed, "CitizenshipJury: already executed");
         require(txn.approvals >= REQUIRED_SIGNATURES, "CitizenshipJury: not enough confirmations");
