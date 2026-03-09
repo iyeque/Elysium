@@ -56,11 +56,12 @@
 
 ---
 
-**Implementation Plan:**
-- Each task will be broken into small steps, coded, tested, and committed.
-- Use `memory/backlog.md` to track detailed subtasks and status.
-- Update heartbeat after each major step.
-- Final push to GitHub when all tasks pass tests.
+## 🧩 Repository Separation
 
-**Start Date:** 2026-03-08
-**Progress:** 7/7 tasks complete ✅ All priority tasks done!
+On 2026-03-09, OpenClaw workspace identity/config files were moved to a dedicated repository:
+
+- **New repo:** `wilma` (https://github.com/iyeque/wilma)
+- **Files moved:** IDENTITY.md, USER.md, SOUL.md, AGENTS.md, TOOLS.md, HEARTBEAT.md, BOOTSTRAP.md
+- **Elysium repo:** Now clean — only Elysium project files and memory.
+
+**Future tasks:** Keep OpenClaw-specific configuration in the wilma repository; Elysium work stays in the Elysium repository. The local workspace still contains both (OpenClaw needs the files), but the Elysium git no longer tracks them.
