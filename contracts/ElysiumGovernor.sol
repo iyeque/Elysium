@@ -54,6 +54,9 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
     mapping(uint256 => ProposalType) public proposalTypes;
     mapping(uint256 => Tier) public proposalTiers;
     
+    // Temporary storage for dynamic timelocks during proposal creation
+    uint256 private currentProposalTier;
+    
     // Founder Veto Window (Constitution Article VIII)
     bytes32 public constant FOUNDER_ROLE = keccak256("FOUNDER_ROLE");
     uint48 public immutable deploymentTime;
@@ -122,11 +125,16 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         }
         Tier tier = _getTierFromType(proposalType);
         
+        // Set current tier for dynamic timelocks
+        currentProposalTier = uint256(tier);
+        
         // Create description with title and type
         string memory description = string(abi.encodePacked(title, "#", _proposalTypeToString(proposalType)));
         
         // Store proposal metadata
         uint256 proposalId = super.propose(targets, values, calldatas, description);
+        // Clear current tier after proposal creation
+        currentProposalTier = 0;
         proposalTypes[proposalId] = proposalType;
         proposalTiers[proposalId] = tier;
         
@@ -389,13 +397,26 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         return numerator >= effectiveTotal * requiredPercentage;
     }
     
-    // Required overrides for GovernorTimelockControl
+    // Required overrides for GovernorTimelockControl with tier-specific timelocks
     function votingDelay()
         public
         view
         override(Governor, GovernorSettings)
         returns (uint256)
     {
+        // If called during proposal creation, currentProposalTier is set
+        if (currentProposalTier > 0) {
+            Tier tier = Tier(currentProposalTier);
+            if (tier == Tier.Tier1) {
+                return 1 days;
+            } else if (tier == Tier.Tier2) {
+                return 7 days;
+            } else {
+                // Tier3
+                return 14 days;
+            }
+        }
+        // Default: return GovernorSettings value (1 day) for backward compatibility
         return super.votingDelay();
     }
     
@@ -405,6 +426,15 @@ contract ElysiumGovernor is Governor, GovernorSettings, GovernorCountingSimple, 
         override(Governor, GovernorSettings)
         returns (uint256)
     {
+        if (currentProposalTier > 0) {
+            Tier tier = Tier(currentProposalTier);
+            if (tier == Tier.Tier1 || tier == Tier.Tier2) {
+                return 7 days;
+            } else {
+                // Tier3
+                return 10 days;
+            }
+        }
         return super.votingPeriod();
     }
     

@@ -35,7 +35,13 @@
    - Total tests: 52 passing
 
 ## 🟢 Priority 3: Refinements & Compliance
-6. **Tier Timelocks** – Override `votingDelay()` and `votingPeriod()` in ElysiumGovernor to return different values per proposal tier (Tier1: 1d delay, 7d period; Tier2: 7d delay, 7d period; Tier3: 14d+ delay, 10d period).
+6. **Tier Timelocks** – ✅ **COMPLETE** (2026-03-09)
+   - Override `votingDelay()` and `votingPeriod()` to return tier-specific values:
+     - Tier1 (ParameterChange, TreasurySpendSmall): 1 day delay, 7 days voting
+     - Tier2 (TreasurySpendMedium, MultiSigElection): 7 days delay, 7 days voting
+     - Tier3 (Constitutional, CorePrinciple, AIPhaseTransition, TreasurySpendLarge): 14 days delay, 10 days voting
+   - Implementation uses `currentProposalTier` storage variable set during `propose()` to provide context to `votingDelay()` and `votingPeriod()`.
+
 7. **H3 Phase Transition Safeguards** – Enforce 30-day waiting period for phase transitions; prevent phase shopping; ensure H3 cannot challenge or serve on multi-sig.
 
 ---
