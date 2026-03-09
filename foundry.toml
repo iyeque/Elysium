@@ -17,9 +17,13 @@ remappings = [
 [rpc_endpoints]
 arbitrum_sepolia = "${ARBITRUM_SEPOLIA_RPC_URL}"
 localhost = "http://localhost:8545"
+sepolia = "${SEPOLIA_RPC_URL}"
+holesky = "${HOLESKY_RPC_URL}"
 
 [etherscan]
 arbitrum_sepolia = { key = "${ETHERSCAN_API_KEY}", url = "https://sepolia-explorer.arbitrum.io/api" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
+holesky = { key = "${ETHERSCAN_API_KEY}" }
 
 [fuzz]
 runs = 200
