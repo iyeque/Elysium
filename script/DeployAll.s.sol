@@ -27,6 +27,18 @@ contract DeployAll is Script {
     ElysiumUpgradeMultiSig upgradeMultiSig;
     CitizenshipJury citizenshipJury;
 
+    mapping(address => bool) private minted;
+
+    function _mintIfNew(address[] memory addrs) internal {
+        for (uint256 i = 0; i < addrs.length; i++) {
+            address a = addrs[i];
+            if (!minted[a]) {
+                citizenshipNFT.mintHuman(a, 3, 1, "");
+                minted[a] = true;
+            }
+        }
+    }
+
     function setUp() public {}
 
     function run() public {
@@ -51,47 +63,34 @@ contract DeployAll is Script {
         // 5. Update OperatorRegistry
         operatorRegistry.setCitizenshipNft(address(citizenshipNFT));
 
-        // 6. Define multisig signers (customize before deploying to testnet/mainnet)
-        // IMPORTANT: Replace these with actual eligible addresses before production deployment.
-        address[] memory upgradeSigners = new address[](5);
-        upgradeSigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
-        upgradeSigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
-        upgradeSigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
-        upgradeSigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
-        upgradeSigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+        // 6. Use the first 5 anvil accounts as signers for all multisigs (distinct subsets)
+        address[] memory baseSigners = new address[](5);
+        baseSigners[0] = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
+        baseSigners[1] = 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199;
+        baseSigners[2] = 0x6b3595068778DDB901d426cF4cf47D7dD4BF8c6D;
+        baseSigners[3] = 0x3c84B3D7E3419D0891bAd1A5e1f0AC92c9A68Cb1;
+        baseSigners[4] = 0x0087e5b90d452c89998a78b1b155445bd1A8e108;
 
+        // Upgrade: all 5
+        address[] memory upgradeSigners = baseSigners;
+
+        // Pause: subset of first 3 (to satisfy max 3 signers)
         address[] memory pauseSigners = new address[](3);
-        pauseSigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
-        pauseSigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
-        pauseSigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
+        pauseSigners[0] = baseSigners[0];
+        pauseSigners[1] = baseSigners[1];
+        pauseSigners[2] = baseSigners[2];
 
-        address[] memory treasurySigners = new address[](5);
-        treasurySigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
-        treasurySigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
-        treasurySigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
-        treasurySigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
-        treasurySigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+        // Treasury: all 5
+        address[] memory treasurySigners = baseSigners;
 
-        address[] memory jurySigners = new address[](5);
-        jurySigners[0] = 0xE6b935031c7BaD3A2e4Bc0B15AF4c57963719cBE;
-        jurySigners[1] = 0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE;
-        jurySigners[2] = 0xE3Cc7740A4a9Bfe5cd78F7D9532d23B51f9a5b74;
-        jurySigners[3] = 0x3D45B09ED77A4525822a8dC379d26Bd799957c43;
-        jurySigners[4] = 0x698171228D3AB667FD3B5B18b08Ebf8CbF9CF3BF;
+        // Jury: all 5
+        address[] memory jurySigners = baseSigners;
 
-        // 7. Mint Founder-tier (3), H1 (phase=1) NFTs for all signers
-        for (uint256 i = 0; i < upgradeSigners.length; i++) {
-            citizenshipNFT.mintHuman(upgradeSigners[i], 3, 1, "");
-        }
-        for (uint256 i = 0; i < pauseSigners.length; i++) {
-            citizenshipNFT.mintHuman(pauseSigners[i], 3, 1, "");
-        }
-        for (uint256 i = 0; i < treasurySigners.length; i++) {
-            citizenshipNFT.mintHuman(treasurySigners[i], 3, 1, "");
-        }
-        for (uint256 i = 0; i < jurySigners.length; i++) {
-            citizenshipNFT.mintHuman(jurySigners[i], 3, 1, "");
-        }
+        // 7. Mint Founder-tier (3), H1 (phase=1) NFTs for all signers (avoid duplicates)
+        _mintIfNew(upgradeSigners);
+        _mintIfNew(pauseSigners);
+        _mintIfNew(treasurySigners);
+        _mintIfNew(jurySigners);
 
         // 8. Deploy Staking
         staking = new Staking(address(elys), address(citizenshipNFT));
