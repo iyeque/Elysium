@@ -31,6 +31,7 @@ contract MintSigners is Script {
 
     function _parseAddresses(string memory csv) internal pure returns (address[] memory) {
         bytes memory b = bytes(csv);
+        if (b.length == 0) return new address[](0);
         uint256 count = 1;
         for (uint256 i = 0; i < b.length; i++) {
             if (b[i] == ',') count++;
@@ -38,31 +39,33 @@ contract MintSigners is Script {
         address[] memory result = new address[](count);
         uint256 start = 0;
         uint256 idx = 0;
-        for (uint256 i = 0; i < b.length; i++) {
-            if (b[i] == ',') {
-                result[idx] = _parseAddr(string(abi.encodePacked(b[start:i])));
+        for (uint256 i = 0; i <= b.length; i++) {
+            if (i == b.length || b[i] == ',') {
+                result[idx] = _parseAddrFromBytes(b, start, i);
                 start = i + 1;
                 idx++;
             }
         }
-        result[idx] = _parseAddr(string(abi.encodePacked(b[start:b.length])));
         return result;
     }
 
-    function _parseAddr(string memory hexStr) internal pure returns (address) {
-        bytes memory b = bytes(hexStr);
-        require(b.length == 42 && b[0] == '0' && b[1] == 'x', "bad addr");
-        bytes20 a;
+    function _parseAddrFromBytes(bytes memory b, uint256 start, uint256 end) internal pure returns (address) {
+        uint256 len = end - start;
+        require(len == 42 && b[start] == '0' && b[start+1] == 'x', "invalid address format");
+        uint160 addrUint = 0;
         for (uint256 i = 0; i < 20; i++) {
-            a[i] = bytes1(uint8((_hex(b[2+i*2]) << 4) + _hex(b[3+i*2])));
+            uint8 hi = _hex(uint8(b[start + 2 + i*2]));
+            uint8 lo = _hex(uint8(b[start + 3 + i*2]));
+            uint8 byteVal = (hi << 4) + lo;
+            addrUint = (addrUint << 8) | byteVal;
         }
-        return address(a);
+        return address(addrUint);
     }
 
     function _hex(uint8 c) internal pure returns (uint8) {
         if (c >= 48 && c <= 57) return c - 48;
         if (c >= 97 && c <= 102) return c - 87;
         if (c >= 65 && c <= 70) return c - 55;
-        revert("bad hex");
+        revert("invalid hex");
     }
 }
